@@ -20,7 +20,6 @@ For this exercise, you should write some code which does the following:
 |etc|---|---|---|---|---|---|---|
 
 ## Objective
-
 This assignment is designed to test that you can:
 
 1. Work with multiple input data arranged hierarchically in folders;
