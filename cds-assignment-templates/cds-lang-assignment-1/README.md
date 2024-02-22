@@ -1,6 +1,5 @@
 # Portfolio 1: Extracting linguistic features using spaCy
-*By Sofie Mosegaard*
-*22-02-2023*
+*By Sofie Mosegaard, 22-02-2023*
 
 This assignment concerns using ```spaCy``` to extract linguistic information from a corpus of texts.
 
