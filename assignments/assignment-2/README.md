@@ -17,7 +17,7 @@ The assignment has the objective:
 
 When cloned, your repository 'assignment 2' will contain four folders:
 -   ```in```: contains the data 'fake_or_real_news.csv', shich is texts from different news articles. Each article will have a label, that indicates whether it is 'real' or 'fake'.
--   ```src```: consist of *three different scripts*. In the first script, the data will be vectorized and the new feature extracted data will be saved as objects. By doing so, you only have to vectorize the data once instead of once per script, which can be timesaving when working with larger datasets. In the second script, a logistic regression classifier will be trained and evaluated. Finnally, in the third script, a neural network will be trained and evaluated.
+-   ```src```: consist of *three different scripts*. In the first script (`assignment2_src1_vectorizer`), the data will be vectorized and the new feature extracted data will be saved as objects. By doing so, you only have to vectorize the data once instead of once per script, which can be timesaving when working with larger datasets. In the second script (`assignment2_src2_LR`), a Logistic Regression (LR) classifier will be trained and evaluated. Finnally, in the third script (`assignment2_src3_NN`), a Neural Network (NN) will be trained and evaluated.
 -   ```models```:  the vectorizer and the feature extracted objects from script 1, as well as the trained models from script 2 and 3 will be saved in this folder.
 -   ```out```: contains classification reports for the logistic regression and neural network classifier.
 
