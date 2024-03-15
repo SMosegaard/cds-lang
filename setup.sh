@@ -10,11 +10,5 @@ source ./env/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt 
 
-# Install pipreqs
-#pipreqs
-
-# Now, we can run the code in the py script
-python src/test.py 
-
 # Close the envoriment
 deactivate      
