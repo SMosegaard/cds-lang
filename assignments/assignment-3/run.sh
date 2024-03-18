@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-# aAtivate the environment
+# Activate the environment
 source ./env/bin/activate
 
 # Run the code
