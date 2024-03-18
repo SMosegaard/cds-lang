@@ -19,7 +19,7 @@ def expand_query(model, target_word, topn = 10):
     "affection", "romance", etc. These words will expand the original query and allow to include a wider range of
     related words in the song lyric dataset.
     """
-    
+
     similar_words = [word for word, _ in model.most_similar(target_word, topn=topn)]
     return similar_words # returns a list of 10 similar words to the target word
 
@@ -42,6 +42,9 @@ def calculate_percentage(artist_name, expanded_query):
     percentage = (songs_with_words / total_songs) * 100 if total_songs > 0 else 0
     return percentage
 
+#!!!!!!!!!!!!!
+#Find how many songs for a given artist feature terms from the expanded query
+#Calculate the percentage of that artist's songs featuring those terms
 
 def main():
 
