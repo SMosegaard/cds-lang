@@ -17,7 +17,7 @@ The assignment will be carried out on the corpus of lyrics from 57,650 English-l
 The repository consists of 2 bash scripts, 1 README.md file, and 3 folders. The folders contains the following:
 -   ```in```: contains the corpus of lyrics.
 -   ```src```: consists of the scipt that will perform the assignments objective.
--   ```out```: the percentage of a given artist's songs featuring the given input word from the expanded query will be saved as .txt in this folder.
+-   ```out```: holds the saved results in a .txt format. The results will show the percentage of a given artist's songs featuring the given input word from the expanded query.
 
 
 ### Prerequisite work
