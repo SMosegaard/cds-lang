@@ -9,4 +9,4 @@ pip install --upgrade pip
 pip install -r requirements.txt 
 
 # Close the envoriment
-deactivate   
+deactivate
