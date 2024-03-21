@@ -9,9 +9,13 @@ The assignment has the objective:
 -   Create a resusable command line tool for calculating results based on user inputs.
 
 
+### Data
+The assignment will be carried out on the corpus of lyrics from 57,650 English-language songs. You can read more about the data here https://www.kaggle.com/datasets/joebeachcapital/57651-spotify-songs.
+
+
 ### Repository structure
 The repository consists of 2 bash scripts, 1 README.md file, and 3 folders. The folders contains the following:
--   ```in```: contains on the corpus of lyrics from 57,650 English-language songs. You can read more about the data here https://www.kaggle.com/datasets/joebeachcapital/57651-spotify-songs.
+-   ```in```: contains the corpus of lyrics.
 -   ```src```: consists of the scipt that will perform the assignments objective.
 -   ```out```: the percentage of a given artist's songs featuring the given input word from the expanded query will be saved as .txt in this folder.
 
@@ -23,6 +27,7 @@ The repository consists of 2 bash scripts, 1 README.md file, and 3 folders. The 
 
 
 ### Usage
-Run the run bash script in the terminal: $ source run.sh
+Run the run bash script in the terminal with the required input information (--word / -w and --artist / -a): $ source run.sh --word {target_word} --artist {artist_name}
 
-When you run the command above, you will be asked to enter a target word and a artist name. Based on the input word, a pre-trained word embedding model will find 10 closely related words. Afterwards, the percentage of songs by the given artist that features the words from the expanded query will be calculated. 
+As the inputs and the corpus will be made in lower case, it makes no difference how the target word or the artist is spelled.
+Based on the input word, a pre-trained word embedding model will find 10 closely related words. Afterwards, the percentage of songs by the given artist that features the words from the expanded query will be calculated. 
