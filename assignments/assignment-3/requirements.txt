@@ -1,7 +1,3 @@
 pandas
-numpy
-scikit-learn
-seaborn
-matplotlib
-tensorflow
 gensim
+argparse
