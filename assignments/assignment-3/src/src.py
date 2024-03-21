@@ -3,12 +3,17 @@ import pandas as pd
 import os
 import gensim.downloader as api
 import argparse
+import string
 
 # Load the song lyric data
 df = pd.read_csv("in/Spotify_Million_Song_Dataset_exported.csv")
 
+# Remove punctuation from the 'text' column
+df['text'] = df['text'].apply(lambda x: x.translate(str.maketrans('', '', string.punctuation)))
+
 # Load the word embedding model via gensim
 model = api.load("glove-wiki-gigaword-50")
+
 
 def parser():
 
@@ -80,6 +85,7 @@ def calculate_percentage(artist_name, similar_words):
 
 def main():
 
+    # Obtain inputs using parser
     args = parser()
     target_word = args.word
     artist_name = args.artist
@@ -101,3 +107,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
