@@ -16,7 +16,8 @@ Please download the data and place it in the folder called ```in```. Note, that 
 
 ## Repository structure
 
-The repository consists of 2 bash scripts, 1 .txt file, 1 README.md file, and 3 folders. The folders contains the following:
+The repository consists of 2 bash scripts for setup and execution of the code, 1 .txt file with the required packages, and 3 folders. The folders contains the following:
+
 -   ```in```: where you should locate your data.
 -   ```src```: consists of the scipt that will perform the repository  objective.
 -   ```out```: holds the saved results in a .txt format. The results will show the percentage of a given artist's songs featuring the given input word from the expanded query.
