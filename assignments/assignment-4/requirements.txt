@@ -1,0 +1,6 @@
+transformers
+tensorflow
+tf-keras
+matplotlib
+pandas
+seaborn
