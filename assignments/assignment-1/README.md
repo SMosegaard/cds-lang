@@ -15,7 +15,7 @@ The dataset is a collection of essays from Uppsala University encompassing the p
 Please download the data and place it in the folder called ```in```. Note, that you will need to unzip the data inside the folder before, you can execude the code as described below (see: Reproducibility). 
 
 ## Repository structure
-The repository consists of 2 bash scripts, 1 README.md file, 1 txt file, and 3 folders. The folders contains the following:
+The repository consists of 2 bash scripts for setup and execution of the code, 1 .txt file with the required packages, and 3 folders. The folders contains the following:
 
 -   ```in```: where you should locate your data
 -   ```src```: consists of the scipt that will perform the repository objective
