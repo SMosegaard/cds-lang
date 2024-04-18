@@ -31,7 +31,7 @@ def plot_season(df, outpath):
     Plot the distribution of predicted emotions across seasons
     """
     real_freq = df.groupby('Season')['predicted_emotion'].value_counts(normalize = True) * 100
-    plot = sns.catplot(data = df, x = "predicted_emotion", hue = "predicted_emotion", col = "Season", kind = "bar", 
+    plot = sns.catplot(data = df, x = "predicted_emotion", hue = "predicted_emotion", col = "Season", kind = "count", 
                 palette = "husl", legend = False)
     plot.set_axis_labels("", "Relative Frequency (%)")
     plot.set_titles("{col_name}")
@@ -44,7 +44,7 @@ def plot_emotion(df, outpath):
     Plot the relative frequency of each emotion across all seasons
     """
     real_freq = df.groupby('predicted_emotion')['Season'].value_counts(normalize = True) * 100
-    plot = sns.catplot(data = df, x = "Season", hue = "Season", col = "predicted_emotion", kind = "bar",
+    plot = sns.catplot(data = df, x = "Season", hue = "Season", col = "predicted_emotion", kind = "count",
                     palette = "husl")
     plot.set_axis_labels("", "Relative Frequency (%)")
     plot.set_titles("{col_name}")
