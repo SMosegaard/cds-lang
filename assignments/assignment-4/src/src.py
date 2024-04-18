@@ -27,21 +27,24 @@ def predict_emotion(df, classifier):
     for index, row in df.iterrows():
         if type(row["Sentence"]) == str:
             predicted_emotion = classifier(row["Sentence"])[0]['label']
-            df.loc[index, "emotion_score"] = predicted_emotion
+            df.at[index, "predicted_emotion"] = predicted_emotion
     return df
 
-
 def plot_season(df, emotion_colors, outpath):
-    plot = sns.catplot(df, x = "predicted_emotion", hue = "predicted_emotion", col = "Season", kind = "count", 
-                palette = emotion_colors.values(), lengend = False, col_wrap = 4)
-    plot.set_axis_labels("", "test")
+    total_counts = df.groupby('Season')['predicted_emotion'].value_counts(normalize = True) * 100
+    plot = sns.catplot(data = df, x = "predicted_emotion", hue = "predicted_emotion", col = "Season", kind = "count", 
+                palette = emotion_colors.values() , col_wrap = 4) #lengend = False
+    plot.set_axis_labels("", "Relative Frequency (%)")
+    plot.set_titles("{col_name}")
     plt.savefig(outpath)
-    return print("The 'emotion' plot has been saved to the out folder")
-
+    return print("The 'season' plot has been saved to the out folder")
 
 def plot_emotion(df, outpath):
-    sns.catplot(data3, x = "Season", hue = "Season", col = "predicted_emotion", kind = "count",
-                palette = "husl", col_wrap = 4)
+    total_counts = df.groupby('predicted_emotion')['Season'].value_counts(normalize = True) * 100
+    plot = sns.catplot(data = df, x = "Season", hue = "Season", col = "predicted_emotion", kind = "count",
+                    palette = "husl", col_wrap = 4)
+    plot.set_axis_labels("", "Relative Frequency (%)")
+    plot.set_titles("{col_name}")
     plt.savefig(outpath)
     return print("The 'emotion' plot has been saved to the out folder")
 
@@ -60,6 +63,7 @@ def main():
     df = df.head(10)
 
     df = predict_emotion(df, classifier)
+    print(df)
 
     save_df_to_csv(df, "out/data.csv")
 
