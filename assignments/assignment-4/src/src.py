@@ -25,6 +25,15 @@ def predict_emotion(df, classifier):
             df.at[index, "predicted_emotion"] = predicted_emotion
     return df
 
+def calculate_real_freq(df, groupby_col, count_col):
+    """
+    Calculate relative frequency of count_col within each group of groupby_col.
+    The real freq is then normalized to percentages.
+    """
+    real_freq = df.groupby(groupby_col)[count_col].value_counts(normalize = True) * 100
+    real_freq = real_freq.reset_index(name = 'Relative Frequency')
+    return real_freq
+
 
 def plot_season(df, outpath):
     """
@@ -32,14 +41,18 @@ def plot_season(df, outpath):
     The real freq is then normalized to percentages.
     The relative frequency of  predicted emotions across seasons are then plotted.
     """
-    real_freq = df.groupby('Season')['predicted_emotion'].value_counts(normalize = True) * 100
-    real_freq = real_freq.reset_index(name = 'Relative Frequency')
+    seasons = df['Season'].unique()
+    sns.set_context("notebook", font_scale = 0.7)
 
-    plot = sns.catplot(data = real_freq, x = "predicted_emotion", y = "Relative Frequency", hue = "Season",
-                        kind = "bar", palette = "husl", legend = False)
-    plot.set_axis_labels("", "Relative Frequency (%)")
-    plot.set_titles("{col_name}")
-    plt.savefig(outpath)
+    for season in seasons:
+        data = df[df['Season'] == season]
+        real_freq = calculate_real_freq(data, 'Season', 'predicted_emotion')
+
+        plot = sns.catplot(data = real_freq, x = "predicted_emotion", y = "Relative Frequency", hue = "Season",
+                            kind = "bar", palette = "husl", legend = False)
+        plot.set_axis_labels("Predicted Emotion", "Relative Frequency (%)")
+        plot.set_titles("{col_name}")
+        plt.savefig(outpath)
     return print("The 'season' plot has been saved to the out folder")
 
 
@@ -49,16 +62,18 @@ def plot_emotion(df, outpath):
     The real freq is then normalized to percentages.
     The relative frequency of each emotion across all seasons are then plotted.
     """
-    real_freq = df.groupby('predicted_emotion')['Season'].value_counts(normalize = True) * 100
-    real_freq = real_freq.reset_index(name = 'Relative Frequency')
+    emotions = df['predicted_emotion'].unique()
+    sns.set_context("notebook", font_scale = 0.7)
+    
+    for emotion in emotions:
+        data = df[df['predicted_emotion'] == emotion]
+        real_freq = calculate_real_freq(data, 'predicted_emotion', 'Season')
 
-    #plot = sns.catplot(data = df, x = "Season", hue = "Season", col = "predicted_emotion", kind = "count",
-    #                palette = "husl")
-    plot = sns.catplot(data = real_freq, x = "Season", y = "Relative Frequency", hue = "predicted_emotion", 
-                        kind = "bar", palette = "husl")
-    plot.set_axis_labels("", "Relative Frequency (%)")
-    plot.set_titles("{col_name}")
-    plt.savefig(outpath)
+        plot = sns.catplot(data = real_freq, x = "Season", y = "Relative Frequency", hue = "predicted_emotion", 
+                            kind = "bar", palette = "husl", legend = False)
+        plot.set_axis_labels("", "Relative Frequency (%)")
+        plot.set_titles("{col_name}")
+        plt.savefig(outpath)
     return print("The 'emotion' plot has been saved to the out folder")
 
 
@@ -76,8 +91,8 @@ def main():
     classifier = load_classifier()
     df = predict_emotion(df, classifier)
     save_df_to_csv(df, "out/data.csv")
-    plot_season(df, "out/season2.png")
-    plot_emotion(df, "out/emotion2.png")
+    plot_season(df, "out/season3.png")
+    plot_emotion(df, "out/emotion3.png")
 
 if __name__ == "__main__":
     main()
