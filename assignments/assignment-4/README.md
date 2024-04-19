@@ -3,9 +3,10 @@
 
 This repository is dedicated to conducting ```computational text analysis``` using a ```pretrained sentiment analysis model```. The pretrained language model 'emotion-english-distilroberta-base' will be extracted from HuggingFace and applied to a corpus of English text to assess its emotional profile and whether it changes over time. 
 
-The pretrained sentiment model will predict emotion scores randing from 0-1 for Ekman's 6 basic emotions (joy, surprise, sadness, fear, anger, and disgust) as well as a neutral class.
-
+The model is a pretrained DistilRoBERTa-base model and is finetuned on emotion data. The pretrained sentiment model will predict emotion scores randing from 0-1 for Ekman's 6 basic emotions (joy, surprise, sadness, fear, anger, and disgust) as well as a neutral class. 
 You can read about the model [here](https://huggingface.co/j-hartmann/emotion-english-distilroberta-base).
+
+The code will load the classifier and dataset. Secondly, the classifier will be applied to all sentences in the dataset, returning the emotion label with the greatest emotion score. Finally, it will visualise the relative frequency of all emotions.
 
 ## Data source
 
@@ -46,8 +47,8 @@ Then, it plots the distribution of all emotions in all seasons and the relative 
 
 When utilizing the script of the 8 seasons of *Game of Thrones*, it returns the following results:
 
-![alt text](https://github.com/SMosegaard/cds-lang/tree/main/assignments/assignment-4/out/emotion.png?raw=true)
-![alt text](https://github.com/SMosegaard/cds-lang/tree/main/assignments/assignment-4/out/season.png?raw=true)
+![emotion.png](https://github.com/SMosegaard/cds-lang/tree/main/assignments/assignment-4/out/emotion.png?raw=true)
+![season.png](https://github.com/SMosegaard/cds-lang/tree/main/assignments/assignment-4/out/season.png?raw=true)
 
 Anger is the most dominant emotion throughout the series, however it seems to fade gradually as the story progresses towards the end. This trend suggests a possible evolution in the emotional landscape, where the characters probably have handled their battles and conflicts.
 
