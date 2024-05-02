@@ -1,26 +1,41 @@
-# Import packages
 import pandas as pd
 import os
 import gensim.downloader as api
 import argparse
 import string
+from codecarbon import EmissionsTracker
 
-# Load the song lyric data
-df = pd.read_csv("in/Spotify_Million_Song_Dataset_exported.csv")
+def emissions_tracker(tracker_outpath):
+    """
+    """
+    tracker = EmissionsTracker(project_name = "assignment 3",
+                                experiment_id = "assignment_3",
+                                output_dir = tracker_outpath,
+                                output_file = "emissions_assignment3.csv")
+    return tracker
 
-# Remove punctuation from the 'text' column
-df['text'] = df['text'].apply(lambda x: x.translate(str.maketrans('', '', string.punctuation)))
 
-# Load the word embedding model via gensim
-model = api.load("glove-wiki-gigaword-50")
+def load_data(filepath):
+    """ Load data from given filepath """
+    df = pd.read_csv(filepath)
+    return df
+
+
+def remove_punctuation(df):
+    """ Remove punctuation from the 'text' column """
+    return df['text'] = df['text'].apply(lambda x: x.translate(str.maketrans('', '', string.punctuation)))
+
+
+def load_model():
+    """ Load the word embedding model via gensim """
+    model = api.load("glove-wiki-gigaword-50")
+    return model
 
 
 def parser():
-
     """
     Obtain the input target word and artist name using argparse.
     """
-
     parser = argparse.ArgumentParser()
     parser.add_argument("--word",
                         "-w",
@@ -53,7 +68,7 @@ def expand_query(model, target_word, topn = 10):
     return similar_words # returns a list of 10 similar words to the target word and the target word itself
 
 
-def calculate_percentage(artist_name, similar_words):
+def calculate_percentage(df, artist_name, similar_words):
 
     """
     Now, we can define a function, that calculates the percentage of songs by the given artist that features the
@@ -85,18 +100,38 @@ def calculate_percentage(artist_name, similar_words):
 
 def main():
 
+    tracker_outpath = "../assignment-5/out"
+    tracker = emissions_tracker(tracker_outpath)
+
+    tracker.start_task("load and clean data")
+    filepath = "in/Spotify_Million_Song_Dataset_exported.csv"
+    df = load_data(filepath)
+    df = remove_punctuation(df)
+    emissions_a3_load_df = tracker.stop_task()
+
+    tracker.start_task("load model")
+    model = load_model()
+    emissions_a3_load_model = tracker.stop_task()
+
     # Obtain inputs using parser
+    tracker.start_task("parser input")
     args = parser()
     target_word = args.word
     artist_name = args.artist
+    emissions_a3_arg_input = tracker.stop_task()
 
     # Expand the query with 10 similar words
+    tracker.start_task("expand query")
     similar_words = expand_query(model, target_word)
-
+    emissions_a3_expand_query = tracker.stop_task()
+    
     # Calculate the percentage of an artist's songs featuring words from the expanded query
-    percentage = calculate_percentage(artist_name, similar_words)
+    tracker.start_task("calculate percentage")
+    percentage = calculate_percentage(df, artist_name, similar_words)
+    emissions_a3_calculate_percentage= tracker.stop_task()
 
     # Print the results
+    tracker.start_task("print and save results")
     print(f"{percentage}% of {artist_name}'s songs contain words related to {target_word}")
 
     # Save the results as .txt
@@ -105,6 +140,7 @@ def main():
         file.write(f"{percentage}% of {artist_name}'s songs contain words related to {target_word}")
     print("Result saved as .txt")
 
+    emissions_a3_print_save = tracker.stop_task()
+
 if __name__ == "__main__":
     main()
-
