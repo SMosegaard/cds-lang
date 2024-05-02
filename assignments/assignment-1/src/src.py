@@ -6,6 +6,8 @@ import spacy
 from codecarbon import EmissionsTracker
 
 def emissions_tracker(tracker_outpath):
+    """
+    """
     tracker = EmissionsTracker(project_name = "assignment 1",
                                 output_dir = tracker_outpath,
                                 output_file = "emissions_assignment1.csv")
