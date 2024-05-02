@@ -1,4 +1,4 @@
-,Filename,RelFreq NOUN,RelFreq VERB,RelFreq ADJ,RelFreq ADV,No. Unique PER,No. Unique LOC,No. Unique ORG
-0,0158.b8.txt,1809.52,1079.37,704.76,380.95,3,1,4
-1,0318.b8.txt,1673.08,1153.85,682.69,442.31,0,0,1
-2,0219.b8.txt,1607.68,977.8,761.85,623.88,6,2,3
+,Filename,RelFreq NOUN,RelFreq VERB,RelFreq ADV,RelFreq ADJ,No. Unique PER,No. Unique LOC,No. Unique ORG
+0,0158.b8.txt,1809.52,1079.37,380.95,704.76,3,1,4
+1,0219.b8.txt,1607.68,977.8,623.88,761.85,6,2,3
+2,0318.b8.txt,1673.08,1153.85,442.31,682.69,0,0,1
