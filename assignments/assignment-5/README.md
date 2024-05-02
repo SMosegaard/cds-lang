@@ -1,4 +1,5 @@
 # Assignment 5 - Evaluating environmental impact of your exam portfolio
+*By Sofie Mosegaard, 03-05-2024*
 
 In the lecture and code along session, we were introduced to CodeCarbon which allows to track the impact of our code in various different ways. The main contribution of this package is that we end up with an approximate value for CO₂ emissions expressed as kilograms of CO₂-equivalent (CO₂eq).
 
@@ -34,3 +35,17 @@ This assignment is designed to test that you can:
 1. Think critically about the environmental impact of machine learning
 2. Write code which provides approximate benchmarks demonstrating this environmental impact
 3. Present results in a coherent, clear, and understandable way.
+
+
+
+----
+
+HUSK: kan ikke køre "fuld" på samme tid som "task"
+- kør derfor individuelle sub tasks og bare sum dem op, så jeg kan få det fulde resultat også
+
+husk at skriv mine overvejelser og de limitations, der er ved mine valg
+
+plot de forskellige assignments udledning
+
+har kørt tracker på hele assignment 1, da det er en simpel task og koden er i et loop, der loader andre ind, som en pipeline
+
