@@ -23,8 +23,8 @@ def load_data(filepath):
 
 def remove_punctuation(df):
     """ Remove punctuation from the 'text' column """
-    return df['text'] = df['text'].apply(lambda x: x.translate(str.maketrans('', '', string.punctuation)))
-
+    df['text'] = df['text'].apply(lambda x: x.translate(str.maketrans('', '', string.punctuation)))
+    return df
 
 def load_model():
     """ Load the word embedding model via gensim """
@@ -130,17 +130,15 @@ def main():
     percentage = calculate_percentage(df, artist_name, similar_words)
     emissions_a3_calculate_percentage= tracker.stop_task()
 
-    # Print the results
     tracker.start_task("print and save results")
-    print(f"{percentage}% of {artist_name}'s songs contain words related to {target_word}")
-
-    # Save the results as .txt
     filepath = f"out/{artist_name}_{target_word}_results.txt"
     with open(filepath, 'w') as file:
         file.write(f"{percentage}% of {artist_name}'s songs contain words related to {target_word}")
-    print("Result saved as .txt")
+    print("The result has been saved to the out folder")
 
     emissions_a3_print_save = tracker.stop_task()
 
+    tracker.stop()
+    
 if __name__ == "__main__":
     main()
