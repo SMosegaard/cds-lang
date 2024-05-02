@@ -4,11 +4,14 @@ import glob
 import re
 import spacy
 from codecarbon import EmissionsTracker
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 def emissions_tracker(tracker_outpath):
     """
     """
     tracker = EmissionsTracker(project_name = "assignment 1",
+                                experiment_id = "assignment_1",
                                 output_dir = tracker_outpath,
                                 output_file = "emissions_assignment1.csv")
     return tracker
@@ -113,17 +116,102 @@ def process_text(filepath, nlp):
         out_df.to_csv(csv_outpath)
 
 
+def combine_df(dataframes):
+    
+    dfs = []
+    for dataframe in dataframes:
+        df = pd.read_csv(dataframe)
+        subfolder = dataframe.split('/')[1].split('_')[0]  # Extracting identifier from file name
+        df['subfolder'] = subfolder
+        dfs.append(df)
+        
+    combined_df = pd.concat(dfs, ignore_index = True)
+    return combined_df
+
+
+def plot_word_type(combined_df, outpath):
+    """
+    Plot the relative frequency of word type across subfolders 
+    """
+    aggregated_df = combined_df.groupby('subfolder').agg({'RelFreq NOUN': 'sum',
+                                                        'RelFreq VERB': 'sum',
+                                                        'RelFreq ADV': 'sum',
+                                                        'RelFreq ADJ': 'sum'
+                                                        }).reset_index()
+
+    total_freq = aggregated_df[['RelFreq NOUN', 'RelFreq VERB', 'RelFreq ADV', 'RelFreq ADJ']].sum()
+    total_subfolder = aggregated_df[['RelFreq NOUN', 'RelFreq VERB', 'RelFreq ADV', 'RelFreq ADJ']].sum(axis = 1)
+    relfreq_type_df = aggregated_df[['RelFreq NOUN', 'RelFreq VERB', 'RelFreq ADV', 'RelFreq ADJ']].div(total_subfolder, axis = 0)
+    relfreq_type_df = relfreq_type_df * 100
+    relfreq_type_df['subfolder'] = aggregated_df['subfolder']
+
+    word_type_df = pd.melt(relfreq_type_df, id_vars = 'subfolder', var_name = 'Word Type',
+                            value_name = 'Relative Frequency')
+
+    plt.figure(figsize = (10, 6))
+    sns.barplot(data = word_type_df, x = 'subfolder', y = 'Relative Frequency', 
+                hue = 'Word Type', palette = 'viridis')
+    plt.title('Word type across subfolders')
+    plt.xlabel('Subfolder')
+    plt.ylabel('Relative frequency (%)')
+    plt.legend(title = 'Word type')
+    plt.tight_layout()
+    plt.savefig(outpath)
+    return print("The plot has been saved to the out folder")
+
+
+def plot_entities(combined_df, outpath):
+    """
+    Plot the relative frequency of entities across subfolders
+    """
+    aggregated_df = combined_df.groupby('subfolder').agg({'No. Unique PER': 'sum',
+                                                        'No. Unique LOC': 'sum',
+                                                        'No. Unique ORG': 'sum'
+                                                        }).reset_index()
+    
+    total_ents= aggregated_df[['No. Unique PER', 'No. Unique LOC', 'No. Unique ORG']].sum()
+    total_subfolder = aggregated_df[['No. Unique PER', 'No. Unique LOC', 'No. Unique ORG']].sum(axis = 1)
+    relfreq_ents_df = aggregated_df[['No. Unique PER', 'No. Unique LOC', 'No. Unique ORG']].div(total_subfolder, axis = 0)
+    relfreq_ents_df = relfreq_ents_df * 100 # relative_freq *= 100
+    relfreq_ents_df['subfolder'] = aggregated_df['subfolder']
+
+    entity_df = pd.melt(relfreq_ents_df, id_vars = 'subfolder', var_name = 'Entity',
+                        value_name = 'Relative frequency')
+
+    plt.figure(figsize=(10, 6))
+    sns.barplot(data = entity_df, x = 'subfolder', y = 'Relative frequency', 
+                hue = 'Entity', palette = 'viridis')
+    plt.title('Entities across Subfolders')
+    plt.xlabel('Subfolder')
+    plt.ylabel('Relative frequency (%)')
+    plt.legend(title = 'Entity')
+    plt.tight_layout()
+    plt.savefig(outpath)
+    return print("The plot has been saved to the out folder")
+
 def main():
     
     tracker_outpath = "../assignment-5/out"
     tracker = emissions_tracker(tracker_outpath)
     tracker.start()
 
+    tracker.start_task("load spacy model")
     nlp = load_spacy()
+    emissions_a1_load_model = tracker.stop_task()
 
+    tracker.start_task("load data, process text, and save results")
     filepath = os.path.join("..", "..", "..", "..", "cds-lang-data", "USEcorpus", "USEcorpus") # "in", "USEcorpus"
-
     results = process_text(filepath, nlp)
+    emissions_a1_process_save = tracker.stop_task()
+
+    tracker.start_task("plot results")
+    dataframes = ['out/a1_data.csv', 'out/a2_data.csv', 'out/a3_data.csv', 'out/a4_data.csv', 'out/a5_data.csv',
+                'out/b1_data.csv', 'out/b2_data.csv', 'out/b3_data.csv', 'out/b4_data.csv', 'out/b5_data.csv',
+                'out/b6_data.csv', 'out/b7_data.csv', 'out/b8_data.csv', 'out/c1_data.csv']
+    combined_df = combine_df(dataframes)
+    plot_word_type(combined_df, "out/wordtype.png")
+    plot_entities(combined_df, "out/entity.png")
+    emissions_a1_plot = tracker.stop_task()
 
     tracker.stop()
 
