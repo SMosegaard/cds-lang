@@ -8,6 +8,11 @@ The assignment has the objective:
 -   Produce understandable outputs and trained models which can be reused;
 -   Save those results in a clear way which can be shared or used for future analysis
 
+## Data source
+
+insert link, post au
+
+
 ## Installation and requirements
 -   Clone the repository: $ git clone "https://github.com/SMosegaard/cds-lang/tree/main/assignments/assignment-2"
 -   Select Python 3 kernel   
