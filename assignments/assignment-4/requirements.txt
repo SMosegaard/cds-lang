@@ -1,6 +1,7 @@
-transformers
-tensorflow
+transformers==4.40.1
+tensorflow==2.16.1
 tf-keras
-matplotlib
-pandas
-seaborn
+matplotlib==3.8.4
+pandas==2.2.2
+seaborn==0.13.2
+codecarbon==2.3.5
