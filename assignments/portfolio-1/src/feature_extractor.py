@@ -140,9 +140,9 @@ def combine_df(dataframes):
     return combined_df
 
 
-def plot_word_type(combined_df, outpath):
+def plot_word_class(combined_df, outpath):
     """
-    The function plots the relative frequency of word types (noun, verb, adverb, adjective) across subfolders.
+    The function plots the relative frequency of word classes (noun, verb, adverb, adjective) across subfolders.
     The plot will be saved to the specified outpath.
     """
     aggregated_df = combined_df.groupby('subfolder').agg({'RelFreq NOUN': 'sum',
@@ -153,20 +153,20 @@ def plot_word_type(combined_df, outpath):
 
     total_freq = aggregated_df[['RelFreq NOUN', 'RelFreq VERB', 'RelFreq ADV', 'RelFreq ADJ']].sum()
     total_subfolder = aggregated_df[['RelFreq NOUN', 'RelFreq VERB', 'RelFreq ADV', 'RelFreq ADJ']].sum(axis = 1)
-    relfreq_type_df = aggregated_df[['RelFreq NOUN', 'RelFreq VERB', 'RelFreq ADV', 'RelFreq ADJ']].div(total_subfolder, axis = 0)
-    relfreq_type_df = relfreq_type_df * 100
-    relfreq_type_df['subfolder'] = aggregated_df['subfolder']
+    relfreq_class_df = aggregated_df[['RelFreq NOUN', 'RelFreq VERB', 'RelFreq ADV', 'RelFreq ADJ']].div(total_subfolder, axis = 0)
+    relfreq_class_df = relfreq_class_df * 100
+    relfreq_class_df['subfolder'] = aggregated_df['subfolder']
 
-    word_type_df = pd.melt(relfreq_type_df, id_vars = 'subfolder', var_name = 'Word Type',
+    word_class_df = pd.melt(relfreq_class_df, id_vars = 'subfolder', var_name = 'Word class',
                             value_name = 'Relative Frequency')
 
     plt.figure(figsize = (10, 6))
-    sns.barplot(data = word_type_df, x = 'subfolder', y = 'Relative Frequency', 
-                hue = 'Word Type', palette = 'viridis')
-    plt.title('Word type across subfolders')
+    sns.barplot(data = word_class_df, x = 'subfolder', y = 'Relative Frequency', 
+                hue = 'Word class', palette = 'viridis')
+    plt.title('Word classes across subfolders')
     plt.xlabel('Subfolder')
     plt.ylabel('Relative frequency (%)')
-    plt.legend(title = 'Word type')
+    plt.legend(title = 'Word class')
     plt.tight_layout()
     plt.savefig(outpath)
     return print("The plot has been saved to the out folder")
@@ -174,29 +174,18 @@ def plot_word_type(combined_df, outpath):
 
 def plot_entities(combined_df, outpath):
     """
-    The function plots the relative frequency of entities (PERSON, LOC, ORG) across subfolders.
+    The function plots the average number of unique entities (PERSON, LOC, ORG) across subfolders.
     The plot will be saved to the specified outpath.
     """
-    aggregated_df = combined_df.groupby('subfolder').agg({'No. Unique PER': 'sum',
-                                                        'No. Unique LOC': 'sum',
-                                                        'No. Unique ORG': 'sum'
-                                                        }).reset_index()
-    
-    total_ents= aggregated_df[['No. Unique PER', 'No. Unique LOC', 'No. Unique ORG']].sum()
-    total_subfolder = aggregated_df[['No. Unique PER', 'No. Unique LOC', 'No. Unique ORG']].sum(axis = 1)
-    relfreq_ents_df = aggregated_df[['No. Unique PER', 'No. Unique LOC', 'No. Unique ORG']].div(total_subfolder, axis = 0)
-    relfreq_ents_df = relfreq_ents_df * 100 # relative_freq *= 100
-    relfreq_ents_df['subfolder'] = aggregated_df['subfolder']
+    cols = ['No. Unique PER', 'No. Unique LOC', 'No. Unique ORG']
+    avg_ents = combined_df.groupby('subfolder')[cols].mean().reset_index()
+    avg_ens_melted = pd.melt(avg_ents, id_vars = 'subfolder',  var_name = 'Entity', value_name = 'Average count')
 
-    entity_df = pd.melt(relfreq_ents_df, id_vars = 'subfolder', var_name = 'Entity',
-                        value_name = 'Relative frequency')
-
-    plt.figure(figsize=(10, 6))
-    sns.barplot(data = entity_df, x = 'subfolder', y = 'Relative frequency', 
-                hue = 'Entity', palette = 'viridis')
+    plt.figure(figsize = (10, 6))
+    sns.barplot(data = avg_ens_melted, x = 'subfolder', y = 'Average count', hue = 'Entity', palette = 'viridis')
     plt.title('Entities across subfolders')
     plt.xlabel('Subfolder')
-    plt.ylabel('Relative frequency (%)')
+    plt.ylabel('Average number of unique entities')
     plt.legend(title = 'Entity')
     plt.tight_layout()
     plt.savefig(outpath)
@@ -224,7 +213,7 @@ def main():
                 'out/b1_data.csv', 'out/b2_data.csv', 'out/b3_data.csv', 'out/b4_data.csv', 'out/b5_data.csv',
                 'out/b6_data.csv', 'out/b7_data.csv', 'out/b8_data.csv', 'out/c1_data.csv']
     combined_df = combine_df(dataframes)
-    plot_word_type(combined_df, "out/wordtype.png")
+    plot_word_class(combined_df, "out/wordclass.png")
     plot_entities(combined_df, "out/entity.png")
     emissions_a1_plot = tracker.stop_task()
 
