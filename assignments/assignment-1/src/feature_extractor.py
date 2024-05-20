@@ -7,8 +7,11 @@ from codecarbon import EmissionsTracker
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+
 def emissions_tracker(tracker_outpath):
     """
+    The function initializes an EmissionsTracker object to track carbon emissions associated
+    with code execution. The results of this can be found in assignment 5.
     """
     tracker = EmissionsTracker(project_name = "assignment 1",
                                 experiment_id = "assignment_1",
@@ -18,20 +21,25 @@ def emissions_tracker(tracker_outpath):
 
 
 def load_spacy():
-    """ Load SpaCy model """
+    """
+    The function loads the spaCy 'en_core_web_md' model.
+    """
     nlp = spacy.load("en_core_web_md")
     return nlp
 
 
 def remove_metadata(text):
-    """ Remove metadata from text input """
+    """
+    The function removes metadata from a text input.
+    """
     return re.sub(r"<*?>", "", text)
 
 
 def count_pos(doc):
     """
-    Count the number of each part-of-speech (POS) tag in the document. The function takes a spaCy doc
-    object as input and returns a tuple containing counts of nouns, verbs, adjectives, and adverbs.
+    The function counts the occurrences of each part-of-speech (POS) tag in a spaCy document.
+    The function takes a spaCy doc object as input and returns a tuple containing counts of
+    nouns, verbs, adverbs, and adjectives.
     """
     noun_count, verb_count, adv_count, adj_count = 0, 0, 0, 0
 
@@ -50,17 +58,17 @@ def count_pos(doc):
 
 def rel_freq(count, len_doc): 
     """
-    Calculate the relative frequency per 10,000 words and round the decimals. The function takes the number of
-    POS and the total number of tokens in the given text, while returns the relative frequency.
+    The function calculates the relative frequency of a count within a document.
+    The function takes the count of a POS tag and the total number of tokens in the given text,
+    while returns the relative frequency (scaled by 10,000) of the count within the document.
     """
     return round((count/len_doc * 10000), 2)
 
 
 def no_unique_ents(doc):
     """
-    The function counts the total number of unique PER, LOC, and ORG entities. The function takes a spaCy doc
-    object as input and returns a list containing counts of unique entities.
-
+    The function counts the total number of unique entities (PERSON, LOC, ORG). The function
+    takes a spaCy document as input and returns a list containing counts of unique entities.
     """
     enteties = []
 
@@ -85,16 +93,15 @@ def no_unique_ents(doc):
 
 def process_text(filepath, nlp):
     """ 
-    The function iterates over .txt files in the subfolders and extracts linguistic features. Also, it creates a
-    Pandas DataFrame to store and append the extracted features for each file.
+    The function iterates over the text files from a given filepath and extracts linguistic features.
+    The function creasea a Pandas DataFrame to store and append the extracted features for each file.
+    Finally, the dataframes with the extracted features are saved as .csv files.
     """
     for subfolder in sorted(os.listdir(filepath)):
         subfolder_path = os.path.join(filepath, subfolder)
 
         out_df = pd.DataFrame(columns = ("Filename", "RelFreq NOUN", "RelFreq VERB", "RelFreq ADV",
                                         "RelFreq ADJ", "No. Unique PER", "No. Unique LOC", "No. Unique ORG"))
-
-        csv_outpath = os.path.join("out", f"{subfolder}.csv")
 
         for file in sorted(glob.glob(os.path.join(subfolder_path, "*.txt"))):
             with open(file, "r", encoding = "latin-1") as f:
@@ -112,12 +119,16 @@ def process_text(filepath, nlp):
                         No_unique_per, No_unique_loc, No_unique_org]
             out_df.loc[len(out_df)] = text_row
 
-        csv_outpath = os.path.join("out", f"{subfolder}_data.csv")
-        out_df.to_csv(csv_outpath)
+        outpath = os.path.join("out", f"{subfolder}_data.csv")
+        out_df.to_csv(outpath)
+
+    return print("The dataframe has been saved in the out folder")
 
 
 def combine_df(dataframes):
-    
+    """
+    The function combines multiple dataframes into a single dataframe.
+    """
     dfs = []
     for dataframe in dataframes:
         df = pd.read_csv(dataframe)
@@ -131,7 +142,8 @@ def combine_df(dataframes):
 
 def plot_word_type(combined_df, outpath):
     """
-    Plot the relative frequency of word type across subfolders 
+    The function plots the relative frequency of word types (noun, verb, adverb, adjective) across subfolders.
+    The plot will be saved to the specified outpath.
     """
     aggregated_df = combined_df.groupby('subfolder').agg({'RelFreq NOUN': 'sum',
                                                         'RelFreq VERB': 'sum',
@@ -162,7 +174,8 @@ def plot_word_type(combined_df, outpath):
 
 def plot_entities(combined_df, outpath):
     """
-    Plot the relative frequency of entities across subfolders
+    The function plots the relative frequency of entities (PERSON, LOC, ORG) across subfolders.
+    The plot will be saved to the specified outpath.
     """
     aggregated_df = combined_df.groupby('subfolder').agg({'No. Unique PER': 'sum',
                                                         'No. Unique LOC': 'sum',
@@ -181,7 +194,7 @@ def plot_entities(combined_df, outpath):
     plt.figure(figsize=(10, 6))
     sns.barplot(data = entity_df, x = 'subfolder', y = 'Relative frequency', 
                 hue = 'Entity', palette = 'viridis')
-    plt.title('Entities across Subfolders')
+    plt.title('Entities across subfolders')
     plt.xlabel('Subfolder')
     plt.ylabel('Relative frequency (%)')
     plt.legend(title = 'Entity')
@@ -189,18 +202,20 @@ def plot_entities(combined_df, outpath):
     plt.savefig(outpath)
     return print("The plot has been saved to the out folder")
 
+
 def main():
     
+    filepath = os.path.join("..", "..", "..", "..", "cds-lang-data", "USEcorpus", "USEcorpus") # "in", "USEcorpus"
+
     tracker_outpath = "../assignment-5/out"
     tracker = emissions_tracker(tracker_outpath)
     tracker.start()
 
     tracker.start_task("load spacy model")
-    nlp = load_spacy()
+    nlp = spacy.load("en_core_web_md")
     emissions_a1_load_model = tracker.stop_task()
 
     tracker.start_task("load data, process text, and save results")
-    filepath = os.path.join("..", "..", "..", "..", "cds-lang-data", "USEcorpus", "USEcorpus") # "in", "USEcorpus"
     results = process_text(filepath, nlp)
     emissions_a1_process_save = tracker.stop_task()
 
