@@ -100,7 +100,7 @@ def calculate_percentage(df, artist_name, similar_words):
 
 def main():
 
-    tracker_outpath = "../assignment-5/out"
+    tracker_outpath = "../portfolio-5/out"
     tracker = emissions_tracker(tracker_outpath)
 
     tracker.start_task("load and clean data")

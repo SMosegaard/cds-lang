@@ -40,11 +40,11 @@ The repository consists of the following elements:
 
 1.  Clone the repository
 ```python
-$ git clone "https://github.com/SMosegaard/cds-lang/tree/main/assignments/assignment-1"
+$ git clone "https://github.com/SMosegaard/cds-lang/tree/main/assignments/portfolio-1"
 ```
 2.  Navigate into the folder in your terminal
 ```python
-$ cd assignment-1
+$ cd portfolio-1
 ```
 3.  Run the setup bash script to create a virtual envoriment and install required packages specified in the requirement.txt:
 ```python

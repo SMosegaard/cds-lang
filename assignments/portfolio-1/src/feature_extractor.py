@@ -196,7 +196,7 @@ def main():
     
     filepath = os.path.join("..", "..", "..", "..", "cds-lang-data", "USEcorpus", "USEcorpus") # "in", "USEcorpus"
 
-    tracker_outpath = "../assignment-5/out"
+    tracker_outpath = "../portfolio-5/out"
     tracker = emissions_tracker(tracker_outpath)
     tracker.start()
 

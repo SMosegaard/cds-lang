@@ -26,7 +26,7 @@ The repository consists of 2 bash scripts for setup and execution of the code, 1
 
 1.  Clone the repository
 ```python
-$ git clone "https://github.com/SMosegaard/cds-lang/tree/main/assignments/assignment-3"
+$ git clone "https://github.com/SMosegaard/cds-lang/tree/main/assignments/portfolio-3"
 ```
 2.  Navigate into the folder in your terminal
 3.  Run the setup bash script to create a virtual envoriment and install required packages specified in the requirement.txt:
@@ -56,3 +56,6 @@ When utilizing lyrics of 57,650 English-language songs from Spotify, it returns 
 
 ```
 Overall, the repository presents a valuable tool for researchers and music enthusiasts, as it enables them to explore the thematic trends within song lyrics through the lens of word embeddings. Furthermore, the code could be applied to query expansion and semantic search in text datasets beyong music.
+
+
+*CodeCarbon was implemented to monitor carbon emissions associated with code execution. The results will be saved and discussed in portfolio 5.*

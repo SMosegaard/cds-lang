@@ -24,11 +24,11 @@ The repository consists of 2 bash scripts for setup and execution of the code, 1
 
 1.  Clone the repository
 ```python
-$ git clone "https://github.com/SMosegaard/cds-lang/tree/main/assignments/assignment-4"
+$ git clone "https://github.com/SMosegaard/cds-lang/tree/main/assignments/portfolio-4"
 ```
 2.  Navigate into the folder in your terminal
 ```python
-$ cd assignment-4
+$ cd portfolio-4
 ```
 3.  Run the setup bash script to create a virtual envoriment and install required packages specified in the requirement.txt:
 ```python
@@ -61,3 +61,6 @@ The emotions surprice and disgust is most presented during the earlier seasons, 
 However, it's crucial to note that emotional labels are predictions. As human language is nuanced and complex, sentences can convey multiple emotions simultaneously. Therefore, the emotion score with the highest value for a given sentence is selected as the emotional label. This approach might also explain the prominence of the emotion neutral, as emotions can be discrete and subtle, and anger, which is a very dominant emotion compared to for example fear, that could be expressed very differently.
 
 The code provides a valuable tool for exploring emotions in texts. It allows for the application of sentiment analysis to various English text datasets, enabling users to delve into emotional nuances of literary work, social media conversations, speeches, lyrics of music, etc.
+
+
+*CodeCarbon was implemented to monitor carbon emissions associated with code execution. The results will be saved and discussed in portfolio 5.*

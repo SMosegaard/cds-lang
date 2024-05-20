@@ -27,3 +27,4 @@ When cloned, your repository 'assignment 2' will contain four folders:
 -   ```out```: contains classification reports for the LR and NN classifier.
 
 
+*CodeCarbon was implemented to monitor carbon emissions associated with code execution. The results will be saved and discussed in portfolio 5.*
