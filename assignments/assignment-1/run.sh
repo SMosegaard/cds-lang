@@ -1,7 +1,8 @@
-# Activate the envoriment
+# Activate the virtual envoriment
 source ./env/bin/activate 
-# Run the code
-python src/src.py
 
-# Close the envoriment
+# Run the code
+python src/feature_extractor.py
+
+# Close the virtual envoriment
 deactivate
