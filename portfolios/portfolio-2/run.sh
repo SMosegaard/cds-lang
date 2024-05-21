@@ -1,8 +1,14 @@
 # Activate the virtual envoriment
 source ./env/bin/activate 
 
-# Run the code
-python src/feature_extractor.py
+# Run the vectorizer
+python src/vectorizer.py
+
+# Run the LR classifier
+python src/LR_classifier.py "$@"
+
+# Run the NN classifier
+python src/NN_classifier.py "$@"
 
 # Close the virtual envoriment
 deactivate
