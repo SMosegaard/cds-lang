@@ -14,7 +14,7 @@ This project will specifically retrieve linguistic features from the Uppsala Stu
 - Saves a dataframe for each subfolder in the ```out``` folder.
 - Visualizes the relative frequency of entities and word types across subfolders. Saves the plots in the ```out``` folder.
 
-To gain a better understanding of the code, all functions in the script ```feature_extractor.py``` will have a short descriptive text.
+To better understand the code, each function in the script ```feature_extractor.py`` will include a brief descriptive text.
 
 ## Data source
 
@@ -22,31 +22,31 @@ In this repository, the linguistic features will be extracted from a series of e
 
 The essays are written at three different terms, which is reflected by the subfolder (a, b, and c), encompassing the period from 1999 to 2001.  
 
-You can download the dataset [here](https://ota.bodleian.ox.ac.uk/repository/xmlui/handle/20.500.12024/2457) and place it in the ```in``` folder. Make sure to unzip the data within the folder before executing the code.
+You can download the dataset [here](https://ota.bodleian.ox.ac.uk/repository/xmlui/handle/20.500.12024/2457) and place it in the ```in``` folder. Before executing the code, make sure to unzip the data.
 
 ## Repository structure
 
-The repository consists of the following elements:
+The repository includes:
 
-- 2 bash scripts for setup of the virtual environments, installation of requirements, and execution of the code
-- 1 .txt file specifying the required packages including versioned dependencies
+- 2 bash scripts for setting up the virtual environment, installing requirements, and execution of the code
+- 1 .txt file listing the required packages with versioned dependencies
 - 1 README.md file
 - 3 folders
-    - in: contains data to be processed
-    - src: consists of the Python code to be executed
-    - out: stores the saved results, i.e., a dataframe in a .csv format for each sub-folder of data and the visualizations of the results as .png.
+    - in: holds the data to be processed
+    - src: contains the Python code for execution
+    - out: stores the saved results, including a dataframe in .csv format for each sub-folder of data and visualizations of the results as .png files.
 
 ## Reproducibility
 
-1.  Clone the repository
+1.  Clone the repository:
 ```python
 $ git clone "https://github.com/SMosegaard/cds-lang/tree/main/portfolios/portfolio-1"
 ```
-2.  Navigate into the folder in your terminal
+2.  Navigate into the folder in your terminal:
 ```python
 $ cd portfolio-1
 ```
-3.  Run the setup bash script to create a virtual envoriment and install required packages specified in the requirement.txt:
+3. Execute the setup bash script to create a virtual environment and install necessary packages listed in the requirement.txt:
 ```python
 $ source setup.sh
 ``` 
@@ -55,7 +55,7 @@ $ source setup.sh
  $ source run.sh
 ``` 
 
-Once the script has finished running, it will print that the results have been saved in the terminal output.
+After the script completes running, it will display a message in the terminal output indicating that the results have been saved.
 
 ## Summary of results
 
