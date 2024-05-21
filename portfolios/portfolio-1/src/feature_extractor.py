@@ -11,12 +11,10 @@ import matplotlib.pyplot as plt
 def emissions_tracker(tracker_outpath):
     """
     The function initializes an EmissionsTracker object to track carbon emissions associated
-    with code execution. The results of this can be found in assignment 5.
+    with code execution. The results of this can be found in portfolio 5.
     """
-    tracker = EmissionsTracker(project_name = "assignment 1",
-                                experiment_id = "assignment_1",
-                                output_dir = tracker_outpath,
-                                output_file = "emissions_assignment1.csv")
+    tracker = EmissionsTracker(project_name = "portfolio 1",
+                                output_dir = tracker_outpath)
     return tracker
 
 
@@ -202,11 +200,11 @@ def main():
 
     tracker.start_task("load spacy model")
     nlp = spacy.load("en_core_web_md")
-    emissions_a1_load_model = tracker.stop_task()
+    emissions_1_load_model = tracker.stop_task()
 
     tracker.start_task("load data, process text, and save results")
     results = process_text(filepath, nlp)
-    emissions_a1_process_save = tracker.stop_task()
+    emissions_1_process_save = tracker.stop_task()
 
     tracker.start_task("plot results")
     dataframes = ['out/a1_data.csv', 'out/a2_data.csv', 'out/a3_data.csv', 'out/a4_data.csv', 'out/a5_data.csv',
@@ -215,7 +213,7 @@ def main():
     combined_df = combine_df(dataframes)
     plot_word_class(combined_df, "out/wordclass.png")
     plot_entities(combined_df, "out/entity.png")
-    emissions_a1_plot = tracker.stop_task()
+    emissions_1_plot = tracker.stop_task()
 
     tracker.stop()
 
