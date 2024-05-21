@@ -10,21 +10,50 @@ The assignment has the objective:
 
 ## Data source
 
-insert link, post au
+In this repository, the two classification models will be trained on the 'Fake or Real News dataset'. 
+The dataset consists of ... articles....
+As the classification task is binrary, the two classes are whether the news are real or fake.
 
+You can download the dataset [here](https://www.kaggle.com/datasets/jillanisofttech/fake-or-real-news) and place it in the ```in``` folder. Make sure to unzip the data within the folder before executing the code.
 
-## Installation and requirements
--   Clone the repository: $ git clone "https://github.com/SMosegaard/cds-lang/tree/main/assignments/assignment-2"
--   Select Python 3 kernel   
--   Install the required packages (`pandas`, `seaborn`, `scikit-learn`, `matplot`, `joblib`)
+## Repository structure
 
-## Usage
+The repository consists of the following elements:
 
-When cloned, your repository 'assignment 2' will contain four folders:
--   ```in```: contains the data 'fake_or_real_news.csv', which is texts from different news articles. Each article will have a label, that indicates whether it is 'real' or 'fake'.
--   ```src```: consist of *three different scripts*. In the first script (`assignment2_src1_vectorizer`), the data will be vectorized and the new feature extracted data will be saved as objects. By doing so, you only have to vectorize the data once instead of once per script, which can be timesaving when working with larger datasets. In the second script (`assignment2_src2_LR`), a Logistic Regression (LR) classifier will be trained and evaluated. Finnally, in the third script (`assignment2_src3_NN`), a Neural Network (NN) will be trained and evaluated.
--   ```models```:  contains the vectorizer and the feature extracted objects from script 1, as well as the trained models from script 2 and 3.
--   ```out```: contains classification reports for the LR and NN classifier.
+- 2 bash scripts for setup of the virtual environments, installation of requirements, and execution of the code
+- 1 .txt file specifying the required packages including versioned dependencies
+- 1 README.md file
+- 4 folders
+    - in: contains data to be processed
+    - src: consists of the Python code to be executed
+    - out: stores the saved results, i.e., classification reports in .txt format for both benchmark models
+    - models: stores the vectorizer, vectorizered data, and trained models
+
+## Reproducibility
+
+1.  Clone the repository
+```python
+$ git clone "https://github.com/SMosegaard/cds-lang/tree/main/portfolios/portfolio-2"
+```
+2.  Navigate into the folder in your terminal
+```python
+$ cd portfolio-2
+```
+3.  Run the setup bash script to create a virtual envoriment and install required packages specified in the requirement.txt:
+```python
+$ source setup.sh
+``` 
+4.  Run the run bash script in the terminal to execude the code:
+```python
+ $ source run.sh
+``` 
+
+Once the script has finished running, it will print that the results have been saved in the terminal output.
+
+## Summary of results
+
+## Discussion
+
 
 
 *CodeCarbon was implemented to monitor carbon emissions associated with code execution. The results will be saved and discussed in portfolio 5.*
