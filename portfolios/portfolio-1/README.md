@@ -40,7 +40,7 @@ The repository consists of the following elements:
 
 1.  Clone the repository
 ```python
-$ git clone "https://github.com/SMosegaard/cds-lang/tree/main/assignments/portfolio-1"
+$ git clone "https://github.com/SMosegaard/cds-lang/tree/main/portfolios/portfolio-1"
 ```
 2.  Navigate into the folder in your terminal
 ```python
@@ -74,8 +74,8 @@ Utilizing the Uppsala Student English Corpus, the code successfully generates ta
 In order to derive insights from the results, the various features are illustrated:
 
 <p align = "center">
-    <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-1/out/wordclass.png" width = "300">
-    <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-1/out/entity.png" width = "300">
+    <img src = "https://github.com/SMosegaard/cds-lang/blob/main/portfolios/portfolio-1/out/wordclass.png" width = "300">
+    <img src = "https://github.com/SMosegaard/cds-lang/blob/main/portfolios/portfolio-1/out/entity.png" width = "300">
 </p>
 
 By visually inspecting the first plot, it is notable that nouns are the most frequently used POS followed by verbs. Contrary, adjectives are the significantly least used word class. No significant variations nor patterns emerge when comparing different subfolders nor terms.
