@@ -8,7 +8,6 @@
 *3rd of June 2024*
 
 <br>
-<br>
 
 ## Portfolio exam structure
 
