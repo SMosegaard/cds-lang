@@ -10,6 +10,8 @@ from joblib import dump, load
 import argparse
 from codecarbon import EmissionsTracker
 import subprocess
+import shap
+shap.initjs()
 
 
 def emissions_tracker(outpath):
@@ -53,16 +55,16 @@ def load_vectorised_data(tracker):
     
     if os.path.isfile('models/vectorized_data.pkl'):
         vectorized_data = joblib.load('models/vectorized_data.pkl')
-        X_train_features, y_train, X_test_features, y_test = vectorized_data
+        X_train_features, y_train, X_test_features, y_test, feature_names = vectorized_data
 
     emissions_2_LR_load_vectorized_data = tracker.stop_task()
-    return X_train_features, y_train, X_test_features, y_test
+    return X_train_features, y_train, X_test_features, y_test, feature_names
 
 
 def define_classifier(tracker):
     """
-    Function that defines logistic regression classifier with default parameters.
-    The parameters are therefore only specified for illustration purposes.
+    The function defines the neural network classifier with default parameters.
+    The parameters are therefore simply specified for illustration purposes only.
     """
     tracker.start_task("Define classifier")
     classifier = LogisticRegression(tol = 0.0001,
@@ -77,7 +79,10 @@ def define_classifier(tracker):
 
 
 def grid_search(classifier, X_train, y_train, tracker):
-    
+    """
+    The function performs GridSearch to find the best hyperparameters for the model.
+    The best parameters will be printed in the terminal output and returned.
+    """
     tracker.start_task("GridSearch")
 
     tol = [0.01, 0.001, 0.0001, 0.00001]
@@ -107,7 +112,6 @@ def grid_search(classifier, X_train, y_train, tracker):
 def fit_classifier(classifier, X_train, y_train, tracker, outpath):
     """
     The function fits the LR classifier to the training data.
-    - fits either the vectorised data to default LR parameters or parameters obtained through GridSearch
     """
     tracker.start_task("Fit classifier")
     classifier = classifier.fit(X_train, y_train)
@@ -119,8 +123,8 @@ def fit_classifier(classifier, X_train, y_train, tracker, outpath):
 
 def evaluate_classifier(classifier, X_train_features, y_train, X_test_features, y_test, tracker, outpath):
     """
-    The function evaluates the trained classifier on new, unseen data. This includes plotting a confusion
-    matrix and calculating a classification report, which will be saved to a specified outpath.
+    The function evaluates the trained classifier on new, unseen data. This includes plotting calculating
+    a classification report, which will be saved to a specified outpath.
     """
     tracker.start_task("Evaluate classifier")
     y_pred = classifier.predict(X_test_features)
@@ -135,10 +139,26 @@ def evaluate_classifier(classifier, X_train_features, y_train, X_test_features, 
     return print("The classification report has been saved to the out folder")
 
 
+def shap_explainer(classifier, X_train_features, X_test_features, feature_names, tracker, outpath):
+    """
+    The function uses the SHAP framework to explain the predictions of the classifier by generating a SHAP
+    summary plot that visualizes the impact of each feature on the model's output.
+    The plot will be saved to a specified outpath.
+    """
+    tracker.start_task("Shap")
+    explainer = shap.LinearExplainer(clasifier, X_train_features)
+    shap_values = explainer.shap_values(X_test_features)
+    X_test_array = X_test_features.toarray() 
+    shap.summary_plot(shap_values, X_test_array, feature_names = feature_names, show = False)
+    plt.savefig("out/LR_shap_summary.png", dpi = 150, bbox_inches = 'tight')
+    emissions_2_LR_shap = tracker.stop_task()
+    return print("The SHAP summary plot has been saved to the out folder")
+
+
 def permutation_test(classifier, X_train_features, y_train, tracker, outpath):
     """
-    Performs permutation test on the LR classifier to assess statistical significance of classifier's
-    performance. The permutation test will be plotted and saved to a specified outpath.
+    The function performs permutation test on the LR classifier to assess statistical significance
+    of classifier's performance. The permutation test will be plotted and saved to a specified outpath.
     """
     tracker.start_task("Permutation test")
     score, permutation_scores, pvalue = permutation_test_score(classifier, X_train_features, y_train,
@@ -168,7 +188,7 @@ def main():
 
     args = parser()
 
-    X_train_features, y_train, X_test_features, y_test = load_vectorised_data(tracker)
+    X_train_features, y_train, X_test_features, y_test, feature_names = load_vectorised_data(tracker)
 
     classifier = define_classifier(tracker)
 
@@ -179,6 +199,8 @@ def main():
 
     evaluate_classifier(classifier, X_train_features, y_train, X_test_features, y_test,
                         tracker, "out/LR_classification_report.txt")
+
+    shap_explainer(classifier, X_train_features, X_test_features, feature_names, tracker, "out/LR_shap.txt")
 
     if args.PermutationTest == 'yes':
         permutation_test(classifier, X_test_features, y_test, tracker, "out/LR_permutation.png")

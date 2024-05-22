@@ -61,8 +61,9 @@ def fit_vectorizer(vectorizer, X_train, X_test, y_train, y_test, tracker, vector
 
     X_train_features = vectorizer.fit_transform(X_train)
     X_test_features = vectorizer.transform(X_test)
+    feature_names = vectorizer.get_feature_names_out()
 
-    vectorized_data = [X_train_features, y_train, X_test_features, y_test]
+    vectorized_data = [X_train_features, y_train, X_test_features, y_test, feature_names]
     joblib.dump(vectorized_data, f'{vectorized_data_path}.pkl')
 
     emissions_2_fit_vectorizer = tracker.stop_task()
