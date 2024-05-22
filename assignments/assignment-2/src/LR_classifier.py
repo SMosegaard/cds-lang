@@ -109,13 +109,12 @@ def grid_search(classifier, X_train, y_train, tracker):
     return best_estimator
 
 
-def fit_classifier(classifier, X_train, y_train, tracker, outpath):
+def fit_classifier(classifier, X_train, y_train, tracker):
     """
     The function fits the LR classifier to the training data.
     """
     tracker.start_task("Fit classifier")
     classifier = classifier.fit(X_train, y_train)
-    dump(classifier, f"{outpath}.joblib")
     emissions_2_LR_fit_classifier = tracker.stop_task()
 
     return classifier
@@ -129,11 +128,15 @@ def evaluate_classifier(classifier, X_train_features, y_train, X_test_features, 
     tracker.start_task("Evaluate classifier")
     y_pred = classifier.predict(X_test_features)
 
+    params = {key: classifier.get_params()[key] for key in classifier.get_params().keys() & {'tol', 'max_iter', 'solver', 'penalty'}}
+
     classifier_metrics = metrics.classification_report(y_test, y_pred, target_names = ["FAKE", "REAL"])
     print(classifier_metrics)
 
+    full_report = f"The classifier utilized the parameters:{params}\n\n{classifier_metrics}"
+
     with open(outpath, 'w') as file:
-        file.write(classifier_metrics)
+        file.write(full_report)
 
     emissions_2_LR_evaluate_classifier = tracker.stop_task()
     return print("The classification report has been saved to the out folder")
@@ -146,7 +149,7 @@ def shap_explainer(classifier, X_train_features, X_test_features, feature_names,
     The plot will be saved to a specified outpath.
     """
     tracker.start_task("Shap")
-    explainer = shap.LinearExplainer(clasifier, X_train_features)
+    explainer = shap.LinearExplainer(classifier, X_train_features)
     shap_values = explainer.shap_values(X_test_features)
     X_test_array = X_test_features.toarray() 
     shap.summary_plot(shap_values, X_test_array, feature_names = feature_names, show = False)
@@ -194,14 +197,19 @@ def main():
 
     if args.GridSearch == 'yes':
         classifier = grid_search(classifier, X_train_features, y_train, tracker)
+        classifier = fit_classifier(classifier, X_train_features, y_train, tracker)
+        dump(classifier, "models/LR_classifier_GS.joblib")
+        evaluate_classifier(classifier, X_train_features, y_train, X_test_features, y_test, tracker,
+                            "out/LR_classification_report_GS.txt")
 
-    fit_classifier(classifier, X_train_features, y_train, tracker, "models/LR_classifier")
-
-    evaluate_classifier(classifier, X_train_features, y_train, X_test_features, y_test,
-                        tracker, "out/LR_classification_report.txt")
+    else:
+        classifier = fit_classifier(classifier, X_train_features, y_train, tracker)
+        dump(classifier, "models/LR_classifier.joblib")
+        evaluate_classifier(classifier, X_train_features, y_train, X_test_features, y_test, tracker,
+                            "out/LR_classification_report.txt")
 
     shap_explainer(classifier, X_train_features, X_test_features, feature_names, tracker, "out/LR_shap.txt")
-
+    
     if args.PermutationTest == 'yes':
         permutation_test(classifier, X_test_features, y_test, tracker, "out/LR_permutation.png")
 

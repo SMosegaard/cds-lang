@@ -107,13 +107,12 @@ def grid_search(classifier, X_train, y_train, tracker):
     return best_estimator
  
 
-def fit_classifier(classifier, X_train, y_train, tracker, classifier_path):
+def fit_classifier(classifier, X_train, y_train, tracker):
     """
     The function fits the NN classifier to the training data.
     """
     tracker.start_task("Fit classifier")
     classifier = classifier.fit(X_train, y_train)
-    dump(classifier, f"{classifier_path}.joblib")
     emissions_2_NN_fit_classifier = tracker.stop_task()
     return classifier
 
@@ -126,11 +125,17 @@ def evaluate_classifier(classifier, X_train_features, y_train, X_test_features, 
     tracker.start_task("Evaluate classifier")
     y_pred = classifier.predict(X_test_features)
 
+    params = {key: classifier.get_params()[key] for key in classifier.get_params().keys() & {
+            'hidden_layer_sizes', 'activation', 'solver', 'learning_rate_init'}}
+
     classifier_metrics = metrics.classification_report(y_test, y_pred, target_names = ["FAKE", "REAL"])
     print(classifier_metrics)
 
+    full_report = f"The classifier utilized the parameters:{params}\n\n{classifier_metrics}"
+
     with open(outpath, 'w') as file:
-        file.write(classifier_metrics)
+        file.write(full_report)
+
     emissions_2_NN_evaluate_classifier = tracker.stop_task()
     return print("The classification report has been saved to the out folder")
 
@@ -199,11 +204,18 @@ def main():
 
     if args.GridSearch == 'yes':
         classifier = grid_search(classifier, X_train_features, y_train, tracker)
+        classifier = fit_classifier(classifier, X_train_features, y_train, tracker)
+        dump(classifier, "models/NN_classifier_GS.joblib")
+        evaluate_classifier(classifier, X_train_features, y_train, X_test_features, y_test, tracker,
+                            "out/NN_classification_report_GS.txt")
+        plot_loss_curve(classifier, tracker, "out/NN_loss_curve_GS.png")
 
-    fit_classifier(classifier, X_train_features, y_train, tracker, "models/NN_classifier")
-
-    evaluate_classifier(classifier, X_train_features, y_train, X_test_features, y_test,
+    else:
+        classifier = fit_classifier(classifier, X_train_features, y_train, tracker)
+        dump(classifier, "models/NN_classifier.joblib")
+        evaluate_classifier(classifier, X_train_features, y_train, X_test_features, y_test,
                         tracker, "out/NN_classification_report.txt")
+        plot_loss_curve(classifier, tracker, "out/NN_loss_curve.png")
 
     if args.PermutationTest == 'yes':
         permutation_test(classifier, X_test_features, y_test, tracker, "out/NN_permutation.png")
