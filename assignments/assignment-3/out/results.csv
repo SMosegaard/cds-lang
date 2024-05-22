@@ -1,0 +1,9 @@
+Target word,Artist,Query,Total songs by artist,Songs containing query words,Percentage
+hello,adele,"goodbye, hey, !, kiss, wow, daddy, mama, bitch, dear, cry",54,26,48.15
+sky,radiohead,"horizon, bright, light, blue, dark, cloud, skies, lights, clouds, rainbow",150,46,30.67
+bitch,madonna,"ol', dude, slut, whore, daddy, sweetie, mommy, bastard, fucking, momma",88,2,2.27
+friday,katy perry,"thursday, monday, wednesday, tuesday, week, sunday, saturday, earlier, month, last",89,11,12.36
+love,abba,"dream, life, dreams, loves, me, my, mind, loving, wonder, soul",113,113,100.0
+baby,justin bieber,"babies, boy, girl, newborn, pregnant, mom, child, toddler, mother, cat",131,82,62.6
+baby,justin bieber,"babies, boy, girl, newborn, pregnant, mom, child, toddler, mother, cat",131,82,62.6
+thriller,michael jackson,"horror, drama, sci-fi, spoof, comedy, movie, thrillers, film, fantasy, science-fiction",176,10,5.68
