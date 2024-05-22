@@ -74,11 +74,14 @@ def main():
     
     tracker = emissions_tracker("../portfolio-5/out")
 
-    X_train, X_test, y_train, y_test = data_Load_split(tracker, "in/fake_or_real_news.csv")
+    if os.path.isfile('models/vectorized_data.pkl'):
+        print("The TF-IDF vectorizer object and vectorized data already excist")
 
-    vectorizer = define_vectorizer(tracker, "models/tfidf_vectorizer")
-    fit_vectorizer(vectorizer, X_train, X_test, y_train, y_test, tracker, "models/vectorized_data")
-    
+    else:
+        X_train, X_test, y_train, y_test = data_Load_split("in/fake_or_real_news.csv")
+        vectorizer = define_vectorizer("models/tfidf_vectorizer")
+        fit_vectorizer(vectorizer, X_train, X_test, y_train, y_test, "models/vectorized_data")
+      
     tracker.stop() 
 
 if __name__ == "__main__":
