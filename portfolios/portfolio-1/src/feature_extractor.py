@@ -194,8 +194,7 @@ def main():
     
     filepath = os.path.join("..", "..", "..", "..", "cds-lang-data", "USEcorpus", "USEcorpus") # "in", "USEcorpus"
 
-    tracker_outpath = "../portfolio-5/out"
-    tracker = emissions_tracker(tracker_outpath)
+    tracker = emissions_tracker("../portfolio-5/out")
     tracker.start()
 
     tracker.start_task("load spacy model")
