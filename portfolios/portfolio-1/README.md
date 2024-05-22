@@ -74,8 +74,8 @@ Utilizing the Uppsala Student English Corpus, the code successfully generates ta
 In order to derive insights from the results, the various features are illustrated:
 
 <p align = "center">
-    <img src = "https://github.com/SMosegaard/cds-lang/blob/main/portfolios/portfolio-1/out/wordclass.png" width = "300">
-    <img src = "https://github.com/SMosegaard/cds-lang/blob/main/portfolios/portfolio-1/out/entity.png" width = "300">
+    <img src = "https://github.com/SMosegaard/cds-lang/blob/main/portfolios/portfolio-1/out/wordclass.png" width = "400">
+    <img src = "https://github.com/SMosegaard/cds-lang/blob/main/portfolios/portfolio-1/out/entity.png" width = "400">
 </p>
 
 By visually inspecting the first plot, it is notable that nouns are the most frequently used POS followed by verbs. Contrary, adjectives are the significantly least used word class. No significant variations nor patterns emerge when comparing different subfolders nor terms.
