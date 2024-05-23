@@ -4,19 +4,31 @@
 This assignment is designed to train two benchmark, machine learning classifiers on text data and assess their performances using ```scikit-learn```. The repository will utilize supervised machine learning techniques on a binary classification task, where a Logistic Regression (LR) and Neural Network (NN) will learn patterns from labeled data to make predictions on unseen data. 
 
 The two machine learning models will be trained to classify whether news data is "real" or "fake" by doing the following:
+1. Data preparation (```vectorizer.py```):
+    - Loads and splits the data into training and testing sets using an 80-20 split.
+    - Defines and saves a TF-IDF vectorizer object. 
+    - Fits the training data, transforms the training and test data, and saves the vectorized data.
+2.  Load vectorised data (```LR_classifier.py```, ```NN_classifier.py```):
+    - Loads the vectorized data if it exists. If not, it runs the vectorizer.py script.
+3. Model definition
+    - Defines the LR and NN classifier with default parameters.
+4. Hyperparameter tuning:
+    - Optionally, performs GridSearch to tune the hyperparameters through k-fold cross-validation with 5 folds to improve classification accuracy and robustness. For the LR classifier, the tolorance, maximum number of iterations, solver, and penalty will be tuned, while the number of hidden layers, activation, solver, and initial learning rate will be tuned for the NN classifier. 
+5. Model training:
+    - Fits the classifiers with default or tuned parameters to the training data.
+6. Model evaluation:
+    - Evaluates the trained classifiers on unseen test data.
+7. Generate results:
+    - Generates classification reports and saves them further analysis.
+    - For the NN classifier, the training loss and validation accuracy curves will be plotted and saved.
+    - For the LR classifier, the SHAP framework will be employed to create and save a summary plot of influential features. 
+    - Optionally, conducts permutation tests to assess statistical significance of the classifiers' performance.
 
-
-- the vectorizer script will check for the existence of saved vectorized data and either skip or execute the code to create the objects based on that check. 
-
-
-
-To better understand the code, each function in the script ```feature_extractor.py`` will include a brief descriptive text.
+To better understand the code, all functions in the scripts ```src/XXX.py`` will include a brief descriptive text.
 
 ## Data source
 
-In this repository, the two classification models will be trained on the 'Fake or Real News dataset'. 
-The dataset consists of ... articles....
-As the classification task is binrary, the two classes are whether the news are real or fake.
+In this repository, the two classification models will be trained on the 'Fake or Real News dataset'. As the classification task is binrary, the two classes are whether the news are real or fake.
 
 You can download the dataset [here](https://www.kaggle.com/datasets/jillanisofttech/fake-or-real-news) and place it in the ```in``` folder. Before executing the code, make sure to unzip the data.
 
@@ -75,7 +87,7 @@ The table below displays the performance of the logistic regression and neural n
 
 *The full classification reports and visualisations can be found in the ```out``` folder.*
 
-Both the LR and NN classifiers with default parameters achives high average accuracy scores of 89% with balanced performance between both classes. When tuning the hyperparameters, no significant improvements in classification accuracy is detected.
+Both the LR and NN classifiers with default parameters achives high average accuracy scores of 89-90% with balanced performance between both classes. When tuning the hyperparameters, no significant improvements in classification accuracy is detected.
 
 The training loss and and validation accuracy curves of the NN classifiers, respectively with default and tuned parameters, were visualized to assess the models training process and performance:
 
@@ -101,28 +113,16 @@ Finally, the methodology SHAP (SHapley Additive exPlanations) was introduced to 
     <img src = "https://github.com/SMosegaard/cds-lang/blob/main/assignments/assignment-2/out/NN_shap_summary.png" width = "600">
 </p>
 
-- The summary plot shows the feature importance of each feature in the model. The results show that “Status,” “Complaints,” and “Frequency of use” play major roles in determining the results.
+The plot illustrate which words are most influential in determining whether the news is real or fake and how they affects the model's predictions. Each point represents a data record, with features ranked by importance from most to least significant. Higher feature values typically have a more positive impact on the prediction.
 
-- Each point of every row is a record of the test dataset. The features are sorted from the most important one to the less important. We can see that s5 is the most important feature. The higher the value of this feature, the more positive the impact on the target. The lower this value, the more negative the contribution.
+The words "2016" and "october" have numerous red points with negative SHAP values, which suggest that the words contribute to predicting the news as "fake." In contrast, words like "said" and "but" often appear more frequently in articles that the model predicts as "real" news.
 
-SHAP provides each feature an importance value, indicating how much it contributes to the given predictio
-
-
-
-2016, october and Hillary - red
-said, but, candidates - blue
-
-
-The SHAP framework is not compatable with MLP from scikit-learn, in which the summarised features are extracted from the LR model. However, it can be assumed that the results would look somewhat the same given the ....
-
+The SHAP framework is not compatable with MLP from scikit-learn, in which the summarised features are extracted from the LR model. However, it can be assumed that the results would look somewhat the same as both classifiers are trained on the same dataset and elicit almost identical results.
 
 ## Discussion
 
-- it was expected that the NN had outperformed the LG, as it has more omplex architecture and superiority at learning relationships and patterns
---> however, as the classifcation task was binary and the data might have been quite easy --> no differences found
+The superior results suggest that both models are well-suited for the binary classification task at hand. Interestingly, despite the expected superiority of the NN with its complex architecture, no differences in performance between the models were found. Several factors may explain this outcome. As the binary classification task was relatively straightforward, it allowed the simple LR model to learn and perform as well as the more complex NN. Additionaly, the data was well-structured and clen, which allowed for a simpler algorithm.
 
-
-
-
+A slight improvement was observed when implementing GridSearch for hyperparameter tuning. This could be due to cross validation, that improves the robustness of the model. However, given the simplicity of the task, the quality of the dataset, and the almost identical results, it is difficult to derive the real effect of the individual parameters.
 
 *CodeCarbon was implemented to monitor carbon emissions associated with code execution. The results will be saved and discussed in assignment 5.*
