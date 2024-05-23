@@ -2,7 +2,7 @@
 source ./env/bin/activate
 
 # Run the code
-python src/src.py
+python src/emotion_analysis.py
 
-# Close the environment
+# Close the virtual envoriment
 deactivate
