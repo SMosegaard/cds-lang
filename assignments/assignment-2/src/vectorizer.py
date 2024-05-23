@@ -74,7 +74,8 @@ def fit_vectorizer(vectorizer, X_train, X_test, y_train, y_test, tracker, vector
 def main():
     
     tracker = emissions_tracker("../assignment-5/out")
-
+    tracker.start()
+    
     if os.path.isfile('models/vectorized_data.pkl'):
         print("The TF-IDF vectorizer object and vectorized data already excist")
 

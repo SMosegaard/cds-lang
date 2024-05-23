@@ -195,7 +195,8 @@ def permutation_test(classifier, X_train_features, y_train, tracker, outpath):
 def main():
     
     tracker = emissions_tracker("../assignment-5/out")
-
+    tracker.start()
+    
     args = parser()
 
     X_train_features, y_train, X_test_features, y_test, feature_names = load_vectorised_data(tracker)
