@@ -54,8 +54,8 @@ def define_vectorizer(tracker, vectorizer_path):
 
 def fit_vectorizer(vectorizer, X_train, X_test, y_train, y_test, tracker, vectorized_data_path):
     """ 
-    The function fits the TF-IDF vectorizer training data and transforms both the training and test data.
-    The transformed data and labels are saved to a specified outpath
+    The function fits the TF-IDF vectorizer to the training data and transforms both the training
+    and test data. The transformed data and labels are saved to a specified outpath
     """
     tracker.start_task("Fit vectorizer")
 
