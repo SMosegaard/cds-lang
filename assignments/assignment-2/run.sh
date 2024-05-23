@@ -8,7 +8,7 @@ python src/vectorizer.py
 python src/LR_classifier.py "$@"
 
 # Run the NN classifier
-#python src/NN_classifier.py "$@"
+python src/NN_classifier.py "$@"
 
 # Close the virtual envoriment
 deactivate
