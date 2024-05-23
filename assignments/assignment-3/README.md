@@ -1,12 +1,18 @@
 # Assignment 3 - Query Expansion with Word Embeddings
 *By Sofie Mosegaard, 21-03-2023*
 
-This repository is designed to conduct ```query expansion``` with word embeddings via ```Gensim```'s word embedding model ('glove-wiki-gigaword-50').
+This repository demonstrates the use of word embeddings for query expansion and analysis of song lyrics. The assignment is designed to explore the relationship between a target word and an artist's song lyrics by leveraging ```Gensim```'s word embedding model to expand the query and calculate the percentage of songs containing related words. 
 
-The project has the objective:
-1.  Pre-process texts in sensible ways
-2.  Use pretrained word embeddings for query expansion
-3.  Create a resusable command line tool for calculating results based on user inputs.
+An overview of the process:
+
+- The user specifies a target word and an artist
+- Loads the dataset containing containing song lyrics and artist names. It then removes punctuation from the lyrics to prepare the data for analysis.
+- Loads the 'glove-wiki-gigaword-50' word embedding model from gensim. This pre-trained model will capture semantic relations between words and find similar words to the given target word.
+- Expands the query by finding similar words to the target word using the word embedding model.
+- Calculates the percentage of the artist's songs that contain words related to the expanded query.
+- Displays the percentage in the terminal output and saves the results to a .csv file.
+
+By utilizing word embeddings, the script offers an approach to explore song lyrics. To better understand the code, all functions in the script ```src/query_expansion.py`` will include a brief descriptive text.
 
 ## Data source
 
@@ -63,27 +69,20 @@ The code facilitates query expansion with word embeddings. It integrates Gensim'
 |sky|radiohead|horizon, bright, light, blue, dark, cloud, skies, lights, clouds, rainbow|150|46|30.67|
 |friday|katy perry|thursday, monday, wednesday, tuesday, week, sunday, saturday, earlier, month, last|89|11|12.36|
 |love|abba|dream, life, dreams, loves, me, my, mind, loving, wonder, soul|113|113|100|
-|etc|---|---|---|---|---|
+|baby|justin bieber|babies, boy, girl, newborn, pregnant, mom, child, toddler, mother, cat|131|82|62.6|
 
 The findings present the percentage of artist's songs contain words related to a given target word. It can be seen, that the model returns the same word simply in a different conjugation, for example is 'skies' returned as a close word to 'sky' and 'loves' and 'loving' for the target word 'love'.
 
 ## Discussion
 
-- the genism model uses word embeddings to find the most similar words
-- word embeddings --> dense vector representations of words in a continuous vector space where words with similar meanings are closer to each other
-- predictions --> 
+The choice of the pre-trained word embedding model plays a crucial role in the results obtained from query expansion. In this case, the Gensim 'glove-wiki-gigaword-50' model is trained on Wikipedia data, which will exhibit some biases. As the training corpus Wikipedia primarily contains factual information, it will influence the semantic relationships captured by the model.
 
-- modellen er trænet på wikipedia
---> fakta baseret
---> hvis den var trænet på fx dagbog eller web, havde den måske retuneret ord som "friends, beer, party"
---> samme med baby retunerer ord med familie fremfor noget seksuelt eller kærligt
+For example, when analysing the songs of Katy Perry with the target word 'friday' and Justin Bieber with word 'baby', the model returns other weekdays and words related to children and pregnancy. These results are very reasonable given Wikipedia's focus on factual information and reflects the general context in which the words are used on Wikipedia. Thus it is important to acknowledge that the model does not capture all semantic nuances, especially not the creative language commonly found in song lyrics. If the model were trained on web data or personal writings, the results could be significantly different. Instead, the model might associate 'friday' with words like "party, friends, beer", and 'baby' with more romantic or sexual connotations for Justin Bieber's songs.
 
-because it returns versions of the same word --> would have been relevant to extract the root of the returned word and like so limit the model, so it cant return identical words. 
-If they are removed, there will also be room for real synonyms that will expand the query and might elicit more interesting results!
+This limitation shows the importance of the domain of the employed model. The relevance and accuracy of the query expansion results could potentially be improved by fine-tuning the model on domain-specific data such as song lyrics. 
 
+Another limitation observed is the model's tendency to return different conjugations or variations of the same word. While these words are semantically related, they do not contribute to expanding the query in a meaningful way. To address this, it would have been relevant to extract the root form of the returned word and remove identical or very similar words. By doing so, there will be room for real synonyms and related words, that can enhance the query expansion and elicit more interesting results!
 
-The example with Katy Perry and the target word 'friday' is quite interesting, as the model returns realistic and reasonable words. However, if one would to know the song 'Last Friday Night', it might have been more correct to return words like 'party', 'night', 'shots', etc. This demonstrates that the model purely provides a query of the similar words and does not take semantics behind the song, the word, nor the artist into account.
-
-Overall, the repository presents a valuable tool for researchers and music enthusiasts, as it enables them to explore the thematic trends within song lyrics through the lens of word embeddings. Furthermore, the code could be applied to query expansion and semantic search in text datasets beyong music.
+Overall, the repository presents a valuable tool for researchers and music enthusiasts, as it enables them to explore the thematic trends within song lyrics through the lens of word embeddings. Furthermore, the code could be applied to other text datasets beyond music. 
 
 *CodeCarbon was implemented to monitor carbon emissions associated with code execution. The results will be saved and discussed in assignment 5.*
