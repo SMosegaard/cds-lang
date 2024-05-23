@@ -2,7 +2,7 @@
 source ./env/bin/activate
 
 # Run the code
-python src/Query_expansion.py "$@"
+python src/query_expansion.py "$@"
 
 # Close the environment
 deactivate
