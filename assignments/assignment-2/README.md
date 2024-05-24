@@ -82,7 +82,7 @@ The table below displays the performance of the logistic regression and neural n
 |---|---|---|---|
 |LR_default {'tol': 0.0001, 'max_iter': 100, 'solver': 'lbfgs', 'penalty': 'l2'}|0.89|0.89|0.89|
 |LR_GridSearch {'tol': 0.01, 'max_iter': 100, 'solver': 'saga', 'penalty': 'l1'}|0.90|0.90|0.90|
-|NN_default {'hidden_layer_sizes': 100, 'activation': 'relu', 'solver': 'adam', 'learning_rate_init': 0.001}
+|NN_default {'hidden_layer_sizes': 100, 'activation': 'relu', 'solver': 'adam', 'learning_rate_init': 0.001}|0.89|0.89|0.89|
 |NN_GridSearch {'hidden_layer_sizes': '150', 'activation': 'relu', 'solver': 'adam', 'learning_rate_init': 0.01}|0.90|0.90|0.90|
 
 *The full classification reports and visualisations can be found in the ```out``` folder.*
