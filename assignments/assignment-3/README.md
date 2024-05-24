@@ -8,9 +8,10 @@ An overview of the process:
 - The user specifies a target word and an artist
 - Loads the dataset containing containing song lyrics and artist names. It then removes punctuation from the lyrics to prepare the data for analysis.
 - Loads the 'glove-wiki-gigaword-50' word embedding model from gensim. This pre-trained model will capture semantic relations between words and find similar words to the given target word.
-- Expands the query by finding similar words to the target word using the word embedding model.
+- Expands the query by finding similar words to the target word using the word embedding model. Using the Natural Language Toolkit (nltk) library, the words will be filtered to ensure unique words in lemmatized form.
 - Calculates the percentage of the artist's songs that contain words related to the expanded query.
-- Displays the percentage in the terminal output and saves the results to a .csv file.
+- Displays the percentage in the terminal output and saves the results as a dataframe in .csv format.
+- Visualises all target words and queries from the saved dataframe using t-SNE dimensionality reduction to illustarte the relationship between the words.
 
 By utilizing word embeddings, the script offers an approach to explore song lyrics. To better understand the code, all functions in the script ```src/query_expansion.py`` will include a brief descriptive text.
 
@@ -30,7 +31,7 @@ The repository includes:
 - 3 folders
     - in: holds the data to be processed
     - src: contains the Python code for execution
-    - out: stores the saved results, including a dataframe in .csv format. Each row in the dataframe will show the percentage of a given artist's songs featuring the given input word from the expanded query. 
+    - out: stores the saved results, including a t-SNE plot of the findings and a dataframe in .csv format. Each row in the dataframe will show the percentage of a given artist's songs featuring the given input word from the expanded query. 
 
 ## Reproducibility
 
@@ -66,12 +67,18 @@ The code facilitates query expansion with word embeddings. It integrates Gensim'
 |Target word|Artist|Query|Total songs by artist|Songs containing query words|Percentage|
 |---|---|---|---|---|---|
 |hello|adele|goodbye, hey, !, kiss, wow, daddy, mama, bitch, dear, cry|54|26|48.15|
-|sky|radiohead|horizon, bright, light, blue, dark, cloud, skies, lights, clouds, rainbow|150|46|30.67|
+|sky|radiohead|horizon, bright, light, blue, dark, cloud, skies, rainbow, ocean, eyes|150|53|35.33|
 |friday|katy perry|thursday, monday, wednesday, tuesday, week, sunday, saturday, earlier, month, last|89|11|12.36|
-|love|abba|dream, life, dreams, loves, me, my, mind, loving, wonder, soul|113|113|100|
+|love|abba|dream, life, me, my, mind, loving, wonder, soul, crazy, happy|113|113|100|
 |baby|justin bieber|babies, boy, girl, newborn, pregnant, mom, child, toddler, mother, cat|131|82|62.6|
 
-The findings present the percentage of artist's songs contain words related to a given target word. It can be seen, that the model returns the same word simply in a different conjugation, for example is 'skies' returned as a close word to 'sky' and 'loves' and 'loving' for the target word 'love'.
+The findings present the percentage of artist's songs contain words related to a given target word. Despite the implementation of the nltk lemmatization technique, it can be seen that the model sometimes returns the same word in different conjugation, for example is "skies"  as a close word to 'sky' and 'loving' for the target word 'love'.
+
+<p align = "center">
+    <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-3/out/t-SNE_nQueries_from_df.png" width = "600">
+</p>
+
+The t-SNE plot visualizes the relationships between target words and their associated queries. It illustartes the semantic similarities among words and how certain clusters overlap while others remain distinct. For instance, the clusters "hello" and "bitch" reveal a overlap, which indicates a shared semantic context, while the clusters "thriller" and "friday" appear distinctly separate, suggesting unique semantic associations for these target words.
 
 ## Discussion
 
@@ -81,7 +88,7 @@ For example, when analysing the songs of Katy Perry with the target word 'friday
 
 This limitation shows the importance of the domain of the employed model. The relevance and accuracy of the query expansion results could potentially be improved by fine-tuning the model on domain-specific data such as song lyrics. 
 
-Another limitation observed is the model's tendency to return different conjugations or variations of the same word. While these words are semantically related, they do not contribute to expanding the query in a meaningful way. To address this, it would have been relevant to extract the root form of the returned word and remove identical or very similar words. By doing so, there will be room for real synonyms and related words, that can enhance the query expansion and elicit more interesting results!
+Another limitation observed is the model's tendency to return different conjugations or variations of the same word. While these words are semantically related, they do not contribute to expanding the query in a meaningful way. In addition to the implemented lemmatization technique, it would have been relevant to extract the root form of the returned word and remove identical or very similar words. By doing so, there will be room for real synonyms and related words, that can enhance the query expansion and elicit more interesting results!
 
 Overall, the repository presents a valuable tool for researchers and music enthusiasts, as it enables them to explore the thematic trends within song lyrics through the lens of word embeddings. Furthermore, the code could be applied to other text datasets beyond music. 
 
