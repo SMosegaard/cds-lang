@@ -24,7 +24,7 @@ The two machine learning models will be trained to classify whether news data is
     - For the LR classifier, the SHAP framework will be employed to create and save a summary plot of influential features. 
     - Optionally, conducts permutation tests to assess statistical significance of the classifiers' performance.
 
-To better understand the code, all functions in the scripts ```src/XXX.py`` will include a brief descriptive text.
+To better understand the code, all functions in the scripts ```src/XXX.py``` will include a brief descriptive text.
 
 ## Data source
 
@@ -110,7 +110,7 @@ The permutation tests confirmed that the models are statistically independent an
 Finally, the methodology SHAP (SHapley Additive exPlanations) was introduced to provide an overview of the most important features and explain the predictions of the classifier. The impact of the most influential features are summarised:
 
 <p align = "center">
-    <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-2/out/NN_shap_summary.png" width = "600">
+    <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-2/out/LR_shap_summary.png" width = "400">
 </p>
 
 The plot illustrate which words are most influential in determining whether the news is real or fake and how they affects the model's predictions. Each point represents a data record, with features ranked by importance from most to least significant. Higher feature values typically have a more positive impact on the prediction.
