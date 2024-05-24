@@ -4,6 +4,11 @@ import gensim.downloader as api
 import argparse
 import string
 from codecarbon import EmissionsTracker
+import nltk
+from nltk.stem import WordNetLemmatizer
+from sklearn.manifold import TSNE
+import matplotlib.pyplot as plt
+import numpy as np
 
 
 def emissions_tracker(outpath):
@@ -33,7 +38,6 @@ def parser():
     args = parser.parse_args()
     args.word = args.word.lower()
     args.artist = args.artist.lower()
-
     return args
 
 
@@ -66,15 +70,29 @@ def load_model(tracker):
     return model
 
 
-def expand_query(model, target_word, tracker, topn = 10):
+def expand_query(model, target_word, tracker, topn = 20):
     """
-    The function expands the query by finding similar words to the given target word using
-    the word embedding model. The function will return a list of 10 similar words to the target word.
+    The function expands the query by finding 20 similar words to the given target word using
+    the word embedding model. Then it filters these words to remove any that contains the
+    target words, ensuring each word is unique in its lemmatized form. The function will
+    return a list of 10 similar, unique words to the target word.
     """
     tracker.start_task("expand query")
     similar_words = [word for word, _ in model.most_similar(target_word, topn = topn)]
+    
+    lemmatizer = WordNetLemmatizer()
+    filtered_words = [word for word in similar_words if target_word not in word]
+    
+    lemmatized_word_list = set()
+    unique_words = []
+    for word in filtered_words:
+        lemmatized_word = lemmatizer.lemmatize(word)
+        if lemmatized_word not in lemmatized_word_list:
+            lemmatized_word_list.add(lemmatized_word)
+            unique_words.append(word)
+
     emissions_3_expand_query = tracker.stop_task()
-    return similar_words
+    return  unique_words[:10]
 
 
 def calculate_percentage(df, artist_name, similar_words, tracker):
@@ -98,11 +116,12 @@ def calculate_percentage(df, artist_name, similar_words, tracker):
             if word in song and song not in songs_counted:
                 songs_counted.add(song)
                 songs_with_words += 1
-    
+
     percentage = (songs_with_words / total_songs) * 100 if total_songs > 0 else 0
     percentage = round(percentage, 2)
     emissions_3_calculate_percentage= tracker.stop_task()
     return total_songs, songs_with_words, percentage
+
 
 
 def save_results_to_df(df, target_word, artist_name, similar_words, total_songs, songs_with_words, percentage, tracker):
@@ -128,7 +147,48 @@ def save_results_to_df(df, target_word, artist_name, similar_words, total_songs,
         new_row_df.to_csv(f"out/results.csv", index = False, mode = 'a', header = False)
     print(f"{percentage}% of {artist_name}'s songs contain words related to {target_word}")
     emissions_3_save_results = tracker.stop_task()
-    return print("The result has been saved to the out folder")
+    return print("The dataframe has been saved to the out folder")
+
+
+def visualize_multiple_words_from_df(model, df, outpath, tracker, topn = 10):
+    """
+    The function visualizes all the target words and their query (list of similar words) from the saved
+    dataframe using t-SNE dimensionality reduction. The plot will show the relations between the words
+    in a lower-dimensional space. It will be saved to a specified outpath.
+    """
+    tracker.start_task("visualise query")
+    all_words = []
+    word_labels = []
+
+    for index, row in df.iterrows():
+        target_word = row['Target word']
+        similar_words = row['Query'].split(', ')
+        all_words.extend([target_word] + similar_words)
+        word_labels.extend([target_word] * (len(similar_words) + 1))
+
+    word_vectors = np.array([model[word] for word in all_words])
+    tsne = TSNE(n_components = 2, perplexity = 10, random_state = 123)
+    reduced_vectors = tsne.fit_transform(word_vectors)
+    
+    plt.figure(figsize = (12, 12))
+    unique_target_words = list(set(df['Target word']))
+    colors = plt.get_cmap('Set2', len(unique_target_words))
+
+    for i, (word, label) in enumerate(zip(all_words, word_labels)):
+        if word in df['Target word'].values:
+            plt.scatter(reduced_vectors[i, 0], reduced_vectors[i, 1], color='red')
+            plt.annotate(word, (reduced_vectors[i, 0], reduced_vectors[i, 1]), color='red')
+        else:
+            color_idx = unique_target_words.index(label)
+            plt.scatter(reduced_vectors[i, 0], reduced_vectors[i, 1], color=colors(color_idx))
+            plt.annotate(word, (reduced_vectors[i, 0], reduced_vectors[i, 1]), color=colors(color_idx))
+
+    plt.title("t-SNE visualization of multiple target words and their similar words")
+    plt.tight_layout()
+    plt.savefig(outpath)
+    plt.show()
+    emissions_3_plot = tracker.stop_task()
+    return print("The visualization has been saved to the out folder")
 
 
 def main():
@@ -144,11 +204,14 @@ def main():
 
     model = load_model(tracker)
 
-    similar_words = expand_query(model, args.word, tracker, topn = 10)
+    similar_words = expand_query(model, args.word, tracker, topn = 20)
     
     total_songs, songs_with_words, percentage = calculate_percentage(df, args.artist, similar_words, tracker)
 
     save_results_to_df(df, args.word, args.artist, similar_words, total_songs, songs_with_words, percentage, tracker)
+
+    results_df = pd.read_csv("out/results.csv")
+    visualize_multiple_words_from_df(model, results_df, "out/t-SNE_nQueries_from_df.png", tracker, topn = 10)
 
     tracker.stop()
     
