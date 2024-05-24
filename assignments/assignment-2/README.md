@@ -92,8 +92,8 @@ Both the LR and NN classifiers with default parameters achives high average accu
 The training loss and and validation accuracy curves of the NN classifiers, respectively with default and tuned parameters, were visualized to assess the models training process and performance:
 
 <p align = "center">
-    <img src = "https://github.com/SMosegaard/cds-lang/blob/main/assignments/assignment-2/out/NN_loss_curve.png" width = "400">
-    <img src = "https://github.com/SMosegaard/cds-lang/blob/main/assignments/assignment-2/out/NN_loss_curve_GS.png" width = "400">
+    <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-2/out/NN_loss_curve.png" width = "400">
+    <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-2/out/NN_loss_curve_GS.png" width = "400">
 </p>
 
 The decreasing loss curves and increasing validation accuracies monstrate that bith models are learning effectively. As the trainings progress, the models improve their understanding of the training data, while also being able to generalize its knowledge to new, unseen data. However, the model with default parameters do show the best fit.
@@ -101,8 +101,8 @@ The decreasing loss curves and increasing validation accuracies monstrate that b
 Although both benchmark models demonstate excellent perfomance in the binary classification tasks and significantly surpasses the chance level of 50%, it is relevanty to assess whether the results are statistically significant. Therefore, the models were permutation tested:
 
 <p align = "center">
-    <img src = "https://github.com/SMosegaard/cds-lang/blob/main/assignments/assignment-2/out/LR_permutation.png" width = "400">
-    <img src = "https://github.com/SMosegaard/cds-lang/blob/main/assignments/assignment-2/out/NN_permutation.png" width = "400">
+    <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-2/out/LR_permutation.png" width = "400">
+    <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-2/out/NN_permutation.png" width = "400">
 </p>
 
 The permutation tests confirmed that the models are statistically independent and the obtained results are statistically better than expected by chance.
@@ -110,7 +110,7 @@ The permutation tests confirmed that the models are statistically independent an
 Finally, the methodology SHAP (SHapley Additive exPlanations) was introduced to provide an overview of the most important features and explain the predictions of the classifier. The impact of the most influential features are summarised:
 
 <p align = "center">
-    <img src = "https://github.com/SMosegaard/cds-lang/blob/main/assignments/assignment-2/out/NN_shap_summary.png" width = "600">
+    <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-2/out/NN_shap_summary.png" width = "600">
 </p>
 
 The plot illustrate which words are most influential in determining whether the news is real or fake and how they affects the model's predictions. Each point represents a data record, with features ranked by importance from most to least significant. Higher feature values typically have a more positive impact on the prediction.
