@@ -55,8 +55,8 @@ Then, it plots the distribution of all emotions in all seasons and the relative 
 When utilizing the script of the 8 seasons of *Game of Thrones*, it returns the following results:
 
 <p align = "center">
-    <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-4/out/emotion.png" width = "400">
-    <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-4/out/season.png" width = "400">
+    <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-4/out/emotion.png" width = "550">
+    <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-4/out/season.png" width = "550">
 </p>
 
 Anger is the most dominant emotion throughout the series, however it seems to fade gradually as the story progresses towards the end. This trend suggests a possible evolution in the emotional landscape, where the characters probably have handled their battles and conflicts.
