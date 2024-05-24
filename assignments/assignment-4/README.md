@@ -8,17 +8,24 @@ You can read about the model [here](https://huggingface.co/j-hartmann/emotion-en
 
 The code will load the classifier and dataset. Secondly, the classifier will be applied to all sentences in the dataset, returning the emotion label with the greatest emotion score. Finally, it will visualise the relative frequency of all emotions.
 
+To better understand the code, all functions in the script ```src/emotion_analysis.py`` will include a brief descriptive text.
+
 ## Data source
 
 The projects objective will be performed on scripts from the TV show *Game of Thrones*. The scripts have been segmented into lines, comprising a total of 23,912 rows. Each rows includes additional metadata, indicating who said the line, what episode it came from, and season of the line.
 
+You can download the dataset [here](https://www.kaggle.com/datasets/albenft/game-of-thrones-script-all-seasons?select=Game_of_Thrones_Script.csv) and place it in the ```in``` folder. Before executing the code, make sure to unzip the data.
+
 ## Repository structure
 
-The repository consists of 2 bash scripts for setup and execution of the code, 1 .txt file with the required packages, and 3 folders. The folders contains the following:
-
--   ```in```: where the data is located.
--   ```src```: consists of the scipt that will perform the repository  objective.
--   ```out```: holds the saved results in a .png format. The results will show the distribution of all emotion labels for all seasons, as well as the relative frequency of each emotion across all seasons.
+The repository includes:
+- 2 bash scripts for setting up the virtual environment, installing requirements, and execution of the code
+- 1 .txt file listing the required packages with versioned dependencies
+- 1 README.md file
+- 3 folders
+    - in: holds the data to be processed
+    - src: contains the Python code for execution
+    - out: stores the saved results in a .png format. The results will show the distribution of all emotion labels for all seasons, as well as the relative frequency of each emotion across all seasons.
 
 ## Reproducibility and usage
 
@@ -47,8 +54,10 @@ Then, it plots the distribution of all emotions in all seasons and the relative 
 
 When utilizing the script of the 8 seasons of *Game of Thrones*, it returns the following results:
 
-![emotion.png](https://github.com/SMosegaard/cds-lang/tree/main/assignments/assignment-4/out/emotion.png?raw=true)
-![season.png](https://github.com/SMosegaard/cds-lang/tree/main/assignments/assignment-4/out/season.png?raw=true)
+<p align = "center">
+    <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-4/out/emotion.png" width = "400">
+    <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-4/out/season.png" width = "400">
+</p>
 
 Anger is the most dominant emotion throughout the series, however it seems to fade gradually as the story progresses towards the end. This trend suggests a possible evolution in the emotional landscape, where the characters probably have handled their battles and conflicts.
 
