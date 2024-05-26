@@ -44,20 +44,20 @@ To ensure reproducibility and facilitate collaboration, follow these steps:
 ```python
 $ git clone "https://github.com/SMosegaard/cds-lang/tree/main/assignments/assignment-1"
 ```
-2. Navigate into the assignment-1 folder in your terminal:
+2. Navigate into the 'assignment-1' folder in your terminal:
 ```python
 $ cd assignment-1
 ```
-3. Execute the 'setup.sh' bash script to create a virtual environment and install the necessary packages listed in 'requirement.txt':
+3. Execute the 'setup.sh' script to create a virtual environment and install the necessary packages listed in 'requirement.txt':
 ```python
 $ source setup.sh
 ``` 
-4. Run the 'run.sh' bash script in the terminal to execute the code and perform the analysis:
+4. Run the 'run.sh' script in the terminal to execute the code and perform the analysis:
 ```python
  $ source run.sh
 ``` 
 
-Upon completion, a message will be displayed in the terminal output, confirming that the results have been successfully saved.
+Upon completion, a message will be displayed in the terminal output, confirming that the results have been successfully saved to the ```out``` folder.
 
 ## Results
 
