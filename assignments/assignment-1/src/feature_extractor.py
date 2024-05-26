@@ -130,7 +130,7 @@ def combine_df(dataframes):
     dfs = []
     for dataframe in dataframes:
         df = pd.read_csv(dataframe)
-        subfolder = dataframe.split('/')[1].split('_')[0]  # Extracting identifier from file name
+        subfolder = dataframe.split('/')[1].split('_')[0] 
         df['subfolder'] = subfolder
         dfs.append(df)
         
