@@ -74,7 +74,7 @@ The inputs will be converted to lowercase, so it is irrelevant whether it is spe
 
 Both classifiers will be executed sequentially. To run a specific model, you can uncomment the corresponding script within the run.sh file.
 
-Upon completion, a message will be displayed in the terminal output, confirming that the results have been successfully saved.
+Upon completion, a message will be displayed in the terminal output, confirming that the results have been successfully saved to the ```out``` folder.
 
 ## Results
 
