@@ -68,7 +68,7 @@ The code facilitates query expansion with word embeddings. It integrates Gensim'
 
 |Target word|Artist|Query|Total songs by artist|Songs containing query words|Percentage|
 |---|---|---|---|---|---|
-|hello|adele|goodbye, hey, !, kiss, wow, daddy, mama, bitch, dear, cry|54|26|48.15|
+|hello|adele|goodbye, hey, kiss, wow, daddy, mama, bitch, dear, cry, mommy|54|27|50|
 |sky|radiohead|horizon, bright, light, blue, dark, cloud, skies, rainbow, ocean, eyes|150|53|35.33|
 |friday|katy perry|thursday, monday, wednesday, tuesday, week, sunday, saturday, earlier, month, last|89|11|12.36|
 |love|abba|dream, life, me, my, mind, loving, wonder, soul, crazy, happy|113|113|100|
