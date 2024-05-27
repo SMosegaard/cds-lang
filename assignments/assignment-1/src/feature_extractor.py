@@ -14,7 +14,8 @@ def emissions_tracker(tracker_outpath):
     with code execution. The results of this can be found in assignment 5.
     """
     tracker = EmissionsTracker(project_name = "assignment 1",
-                                output_dir = tracker_outpath)
+                                output_dir = tracker_outpath,
+                                output_file = "emissions_assignment_1")
     return tracker
 
 
@@ -192,7 +193,7 @@ def plot_entities(combined_df, outpath):
 
 def main():
     
-    filepath = os.path.join("..", "..", "..", "..", "cds-lang-data", "USEcorpus", "USEcorpus") # "in", "USEcorpus"
+    filepath = os.path.join("in", "USEcorpus")
 
     tracker = emissions_tracker("../assignment-5/out")
     tracker.start()
