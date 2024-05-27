@@ -5,6 +5,7 @@ import argparse
 import string
 from codecarbon import EmissionsTracker
 import nltk
+nltk.download('wordnet')
 from nltk.stem import WordNetLemmatizer
 from sklearn.manifold import TSNE
 import matplotlib.pyplot as plt
@@ -17,7 +18,8 @@ def emissions_tracker(outpath):
     with code execution. The results of this can be found in assignment 5.
     """
     tracker = EmissionsTracker(project_name = "assignment 3",
-                                output_dir = outpath)
+                                output_dir = outpath,
+                                output_file = "emissions_assignment_3")
     return tracker
 
 
@@ -73,15 +75,16 @@ def load_model(tracker):
 def expand_query(model, target_word, tracker, topn = 20):
     """
     The function expands the query by finding 20 similar words to the given target word using
-    the word embedding model. Then it filters these words to remove any that contains the
-    target words, ensuring each word is unique in its lemmatized form. The function will
-    return a list of 10 similar, unique words to the target word.
+    the word embedding model. Then it filters these words to remove punctuation and any that
+    contains the target words, ensuring each word is unique in its lemmatized form. The
+    function will return a list of 10 similar, unique words to the target word.
     """
     tracker.start_task("expand query")
     similar_words = [word for word, _ in model.most_similar(target_word, topn = topn)]
     
     lemmatizer = WordNetLemmatizer()
-    filtered_words = [word for word in similar_words if target_word not in word]
+    filtered_words = [word for word in similar_words 
+                    if target_word not in word and not any(char in string.punctuation for char in word)]
     
     lemmatized_word_list = set()
     unique_words = []
@@ -141,10 +144,10 @@ def save_results_to_df(df, target_word, artist_name, similar_words, total_songs,
     }
     new_row_df = pd.DataFrame(new_row, index = [0])
     
-    if not os.path.exists(f"out/results.csv"):
-        new_row_df.to_csv(f"out/results.csv", index = False, mode = 'w')
+    if not os.path.exists(f"out/results_2.csv"):
+        new_row_df.to_csv(f"out/results_2.csv", index = False, mode = 'w')
     else:
-        new_row_df.to_csv(f"out/results.csv", index = False, mode = 'a', header = False)
+        new_row_df.to_csv(f"out/results_2.csv", index = False, mode = 'a', header = False)
     print(f"{percentage}% of {artist_name}'s songs contain words related to {target_word}")
     emissions_3_save_results = tracker.stop_task()
     return print("The dataframe has been saved to the out folder")
@@ -210,8 +213,8 @@ def main():
 
     save_results_to_df(df, args.word, args.artist, similar_words, total_songs, songs_with_words, percentage, tracker)
 
-    results_df = pd.read_csv("out/results.csv")
-    visualize_multiple_words_from_df(model, results_df, "out/t-SNE_nQueries_from_df.png", tracker, topn = 10)
+    results_df = pd.read_csv("out/results_2.csv")
+    visualize_multiple_words_from_df(model, results_df, "out/t-SNE_nQueries_from_df_2.png", tracker, topn = 10)
 
     tracker.stop()
     
