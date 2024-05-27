@@ -15,7 +15,7 @@ An overview of the process:
 
 By utilizing word embeddings, the script offers an approach to explore song lyrics. To better understand the code, all functions in the script ```src/query_expansion.py`` will include a brief descriptive text.
 
-## Data source
+## Data
 
 In this repository, the query expansion with word embeddings will be conducted on the dataset 'Spotify Million Song Dataset'. The dataset comprises a corpus of lyrics from 57,650 English-language songs from Spotify including the the title and artist of the song.
 
