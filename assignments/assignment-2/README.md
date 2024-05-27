@@ -117,7 +117,7 @@ Finally, the methodology SHAP (SHapley Additive exPlanations) was introduced to 
 
 The plot illustrate which words are most influential in determining whether the news is real or fake and how they affect the model's predictions. Each point represents a data record, with features ranked by importance from most to least significant. Higher feature values typically have a more positive impact on the prediction.
 
-The words "2016" and "October" have numerous red points with negative SHAP values, which suggest that the words contribute to predicting the news as "fake." In contrast, words like "said" and "but" often appear more frequently in articles that the model predicts as "real" news.
+The words "2016" and "october" have numerous red points with negative SHAP values, which suggest that the words contribute to predicting the news as "fake." In contrast, words like "said" and "but" often appear more frequently in articles that the model predicts as "real" news.
 
 The SHAP framework is not compatible with MLP from scikit-learn, in which the summarised features are extracted from the LR model. However, it can be assumed that the results would look somewhat the same as both classifiers are trained on the same dataset and elicit almost identical results.
 
