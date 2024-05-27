@@ -3,7 +3,7 @@
 **Sofie Mosegaard**
 
 *Cultural Data Science*  
-*Cognitive Science - Aarhus University*
+*Cognitive Science, Aarhus University*
 
 *3rd of June 2024*
 
