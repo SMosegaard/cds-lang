@@ -49,3 +49,4 @@ plot de forskellige assignments udledning
 
 har kørt tracker på hele assignment 1, da det er en simpel task og koden er i et loop, der loader andre ind, som en pipeline
 
+i assignment 3 skal den ikke loop igennem alt data, men kun for den artist, man vælger. Derfor er den lettere end de andre, hvor alt dataen skal behandles.
