@@ -11,8 +11,9 @@ def emissions_tracker(outpath):
     The function initializes an EmissionsTracker object to track carbon emissions associated
     with code execution. The results of this can be found in assignment 5.
     """
-    tracker = EmissionsTracker(project_name = "assignment 3",
-                                output_dir = outpath)
+    tracker = EmissionsTracker(project_name = "assignment 4",
+                                output_dir = outpath,
+                                output_file = "emissions_assignment_4")
     return tracker
 
 
@@ -77,8 +78,8 @@ def plot_season(data, tracker, outpath):
     """
     tracker.start_task("plot season")
     
-    seasons =  ["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7", "Season 8"]
-    emotions = ["anger", "disgust", "fear", "joy", "neutral", "sadness", "surprise"]
+    seasons = sorted(data["Season"].unique())
+    emotions = sorted(data["predicted_emotion"].unique())
 
     g = sns.catplot(data, x = "predicted_emotion", y = "Relative Frequency", hue = "predicted_emotion",  
                     col = "Season", kind = "bar", col_wrap = 4, col_order = seasons, order = emotions,
@@ -99,10 +100,16 @@ def plot_emotion(data, tracker, outpath):
     The plot will be saved to a specified outpath.
     """
     tracker.start_task("plot emotion")
-    seasons =  ["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7", "Season 8"]
-    emotions = ["anger", "disgust", "fear", "joy", "neutral", "sadness", "surprise"]
 
-    g = sns.catplot(data, x = "Season", y = "Relative Frequency", hue = "predicted_emotion",  
+    emotion_totals = data.groupby("predicted_emotion")["count"].sum().reset_index(name = "total_count")
+    data = data.merge(emotion_totals, on = "predicted_emotion")
+    data["Relative Frequency"] = round(data["count"] / data["total_count"] * 100, 2)
+
+    seasons = sorted(data["Season"].unique())
+    emotions = sorted(data["predicted_emotion"].unique())
+    palette = sns.color_palette("husl", len(seasons))
+
+    g = sns.catplot(data, x = "Season", y = "Relative Frequency", hue = "Season",  
                     col = "predicted_emotion", kind = "bar", col_wrap = 4, col_order = emotions, 
                     order = seasons, palette = "husl", legend = False)
     g.set_axis_labels("", "Relative frequency (%)")
@@ -123,8 +130,9 @@ def main():
     df = pd.read_csv("in/Game_of_Thrones_Script.csv")
     classifier = load_classifier(tracker)
     df = predict_emotion(df, classifier, tracker)
-    save_df_to_csv(df, tracker, "out/data.csv")
+    save_df_to_csv(df, tracker, "out/results.csv")
 
+    df = pd.read_csv("out/results.csv")
     predicted_emotion_count = count_emotions(df, tracker)                         
     plot_season(predicted_emotion_count, tracker, "out/season.png")
     plot_emotion(predicted_emotion_count, tracker, "out/emotion.png")
