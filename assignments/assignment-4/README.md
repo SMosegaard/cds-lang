@@ -3,8 +3,7 @@
 
 This repository is dedicated to conducting ```computational text analysis``` using a ```pretrained sentiment analysis model```. The pretrained language model 'emotion-english-distilroberta-base' will be extracted from HuggingFace and applied to a corpus of English text to assess its emotional profile and whether it changes over time. 
 
-The model is a pretrained DistilRoBERTa-base model and is finetuned on emotion data. The pretrained sentiment model will predict emotion scores randing from 0-1 for Ekman's 6 basic emotions (joy, surprise, sadness, fear, anger, and disgust) as well as a neutral class. 
-You can read about the model [here](https://huggingface.co/j-hartmann/emotion-english-distilroberta-base).
+The model is a pretrained DistilRoBERTa-base model and is finetuned on emotion data. The pretrained sentiment model will predict emotion scores randing from 0-1 for Ekman's 6 basic emotions (joy, surprise, sadness, fear, anger, and disgust) as well as a neutral class. You can read about the model [here](https://huggingface.co/j-hartmann/emotion-english-distilroberta-base).
 
 The code will load the classifier and dataset. Secondly, the classifier will be applied to all sentences in the dataset, returning the emotion label with the greatest emotion score. Finally, it will visualise the relative frequency of all emotions.
 
@@ -74,5 +73,9 @@ However, it's crucial to note that emotional labels are predictions. As human la
 
 The code provides a valuable tool for exploring emotions in texts. It allows for the application of sentiment analysis to various English text datasets, enabling users to delve into emotional nuances of literary work, social media conversations, speeches, lyrics of music, etc.
 
+
+- længden af sæson
+- sæson 8 er kortest, lavest i alle plot...
+- kig på plottet pr sæson - da emotion plottet i hæj grad afhænger af længden på de enkelte sæsonner
 
 *CodeCarbon was implemented to monitor carbon emissions associated with code execution. The results will be saved and discussed in assignment 5.*
