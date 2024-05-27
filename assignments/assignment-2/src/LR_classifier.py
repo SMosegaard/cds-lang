@@ -20,7 +20,8 @@ def emissions_tracker(outpath):
     with code execution. The results of this can be found in assignment 5.
     """
     tracker = EmissionsTracker(project_name = "assignment 2",
-                                output_dir = outpath)
+                                output_dir = outpath,
+                                output_file = "emissions_assignment_2")
     return tracker
 
 
@@ -142,7 +143,7 @@ def evaluate_classifier(classifier, X_train_features, y_train, X_test_features, 
     return print("The classification report has been saved to the out folder")
 
 
-def shap_explainer(classifier, X_train_features, X_test_features, feature_names, tracker, outpath):
+def shap_explainer(classifier, X_train_features, X_test_features, feature_names, tracker):
     """
     The function uses the SHAP framework to explain the predictions of the classifier by generating a SHAP
     summary plot that visualizes the impact of each feature on the model's output.
@@ -209,7 +210,7 @@ def main():
         evaluate_classifier(classifier, X_train_features, y_train, X_test_features, y_test, tracker,
                             "out/LR_classification_report.txt")
 
-    shap_explainer(classifier, X_train_features, X_test_features, feature_names, tracker, "out/LR_shap.txt")
+    shap_explainer(classifier, X_train_features, X_test_features, feature_names, tracker)
     
     if args.PermutationTest == 'yes':
         permutation_test(classifier, X_test_features, y_test, tracker, "out/LR_permutation.png")

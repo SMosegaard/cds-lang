@@ -18,7 +18,8 @@ def emissions_tracker(outpath):
     with code execution. The results of this can be found in assignment 5.
     """
     tracker = EmissionsTracker(project_name = "assignment 2",
-                                output_dir = outpath)
+                                output_dir = outpath,
+                                output_file = "emissions_assignment_2")
     return tracker
 
 
