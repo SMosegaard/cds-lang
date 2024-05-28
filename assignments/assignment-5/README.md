@@ -71,7 +71,7 @@ To evaluate the environmental impact of the portfolio exam, it is first identifi
     </div>
     <div style="float: right; width: 50%;">
         <p align="center">
-            <img src="https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-5/plots/Emissions_per_Assignment.png" width="400">
+            <img src="https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-5/plots/Emissions_per_Assignment.png" width="200">
         </p>
     </div>
 </div>
