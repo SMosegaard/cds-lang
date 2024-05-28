@@ -44,18 +44,6 @@ Now, you can execute the ```src/inspect_environmental_impact.ipynb```. You will 
 
 To evaluate the environmental impact of the portfolio exam, it is first identified which assignments generated the highest emissions in terms of CO₂eq:
 
-| Table Image                                                                                                             |
-|------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|
-|                                                                              | ![Emissions per Assignment](https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-5/plots/Emissions_per_Assignment.png) |
-|                                                                              | <img src="https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-5/plots/Emissions_per_Assignment.png" width="400"> |
-| Assignment   | CO₂eq Emission |                                                                                                                     |
-|--------------|----------------|                                                                                                                     |
-| Assignment 1 | 0.00242        |                                                                                                                     |
-| Assignment 2 | 0.00999        |                                                                                                                     |
-| Assignment 3 | 0.00019        |                                                                                                                     |
-| Assignment 4 | 0.02275        |                                                                                                                     |
-
-
 |Assignment|CO₂eq Emission|
 |---|---|
 |Assignment 1|0.00242|
