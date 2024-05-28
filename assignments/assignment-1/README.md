@@ -42,7 +42,7 @@ To ensure reproducibility and facilitate collaboration, follow these steps:
 ```python
 $ git clone "https://github.com/SMosegaard/cds-lang/tree/main/assignments/assignment-1"
 ```
-2. Navigate into the 'assignment-1' folder in your terminal:
+2. Navigate into the 'assignment-1' folder:
 ```python
 $ cd assignment-1
 ```
