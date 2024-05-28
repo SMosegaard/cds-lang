@@ -1,7 +1,7 @@
 # Assignment 4 - Emotion Analysis with Pretrained Language Models
 *By Sofie Mosegaard, 18-04-2023*
 
-This repository is dedicated to conducting ```computational text analysis``` using a ```pretrained sentiment analysis model```. The pretrained language model 'emotion-english-distilroberta-base' will be extracted from HuggingFace and applied to a corpus of English text to assess its emotional profile and whether it changes over time. 
+This repository is dedicated to conducting ```computational text analysis``` using a ```pretrained sentiment analysis model```. The pretrained large language model 'emotion-english-distilroberta-base' will be extracted from HuggingFace and applied to a corpus of English text to assess its emotional profile and whether it changes over time. 
 
 The model is a pretrained DistilRoBERTa-base model and is finetuned on emotion data. The pretrained sentiment model will predict emotion scores ranging from 0-1 for Ekman's 6 basic emotions (anger, disgust, fear, joy, sadness, and surprise) as well as a neutral class. You can read about the model [here](https://huggingface.co/j-hartmann/emotion-english-distilroberta-base).
 
@@ -15,7 +15,7 @@ To better understand the code, all functions in the script ```src/emotion_analys
 
 ## Data
 
-The projects’ objective will be performed on scripts from the TV show *Game of Thrones*. The scripts have been segmented into lines, comprising a total of 23,912 rows. Each rows includes additional metadata, indicating who said the line, what episode it came from, and season of the line.
+The projects’ objective will be performed on scripts from the TV show *Game of Thrones*. The scripts have been segmented into lines, comprising a total of 23,911 rows. Each rows includes additional metadata, indicating who said the line, what episode it came from, and season of the line.
 
 You can download the dataset [here](https://www.kaggle.com/datasets/albenft/game-of-thrones-script-all-seasons?select=Game_of_Thrones_Script.csv) and place it in the ```in``` folder. Remember to unzip the data before proceeding with the analysis.
 
@@ -51,6 +51,10 @@ $ source setup.sh
 ```python
 $ source run.sh
 ```
+- Which assignment generated the most emissions in terms of CO₂eq? Explain why this might be.
+- Which specific tasks generated the most emissions in terms of CO₂eq? Again, explain why this might be.
+- How robust do you think these results are and how/where might they be improved? 
+- Considerations and limitations in your implementation of CodeCarbon?
 
 Upon completion, a message will be displayed in the terminal output, confirming that the results have been successfully saved to the ```out``` folder.
 
