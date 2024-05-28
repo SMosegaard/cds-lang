@@ -3,7 +3,7 @@
 
 This repository is designed to utilize the open-source Natural Language Processing (NLP) framework ```spaCy``` to extract relevant linguistic information from text data.  
 
-Specifically, the project will retrieve linguistic features from the Uppsala Student English (USE) corpus by doing the following steps:
+Specifically, the project will retrieve linguistic features from the Uppsala Student English (USE) corpus by performing the following steps:
 - Loads the 'en_core_web_md' English spaCy model
 - Initializes a dataframe to store the results
 - Iterates over each text in each subfolder of the corpus
