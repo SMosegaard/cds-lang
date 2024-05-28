@@ -44,8 +44,8 @@ Now, you can execute the ```src/inspect_environmental_impact.ipynb```. You will 
 
 To evaluate the environmental impact of the portfolio exam, it is first identified which assignments generated the highest emissions in terms of CO₂eq:
 
-<div style="display: flex;">
-    <div style="flex: 1; margin-right: 10px;">
+<div style="overflow: hidden;">
+    <div style="float: left; width: 50%;">
         <table>
             <tr>
                 <th>Assignment</th>
@@ -69,7 +69,7 @@ To evaluate the environmental impact of the portfolio exam, it is first identifi
             </tr>
         </table>
     </div>
-    <div style="flex: 1;">
+    <div style="float: right; width: 50%;">
         <p align="center">
             <img src="https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-5/plots/Emissions_per_Assignment.png" width="400">
         </p>
