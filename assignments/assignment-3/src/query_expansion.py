@@ -45,7 +45,7 @@ def parser():
 
 def remove_punctuation(df):
     """
-    The function removes punctuation from the 'text' column
+    The function removes punctuation from the 'text' column.
     """
     df['text'] = df['text'].apply(lambda x: x.translate(str.maketrans('', '', string.punctuation)))
     return df
@@ -64,7 +64,7 @@ def load_clean_data(filepath, tracker):
 
 def load_model(tracker):
     """
-    The function loads the 'glove-wiki-gigaword-50' word embedding model via gensim
+    The function loads the 'glove-wiki-gigaword-50' word embedding model via gensim.
     """
     tracker.start_task("load model")
     model = api.load("glove-wiki-gigaword-50")
@@ -76,8 +76,8 @@ def expand_query(model, target_word, tracker, topn = 20):
     """
     The function expands the query by finding 20 similar words to the given target word using
     the word embedding model. Then it filters these words to remove punctuation and any that
-    contains the target words, ensuring each word is unique in its lemmatized form. The
-    function will return a list of 10 similar, unique words to the target word.
+    contains the target words. This is done to ensure that each word is unique in its lemmatized
+    form. The function will return a list of 10 similar, yet unique words to the target word.
     """
     tracker.start_task("expand query")
     similar_words = [word for word, _ in model.most_similar(target_word, topn = topn)]
@@ -100,13 +100,13 @@ def expand_query(model, target_word, tracker, topn = 20):
 
 def calculate_percentage(df, artist_name, similar_words, tracker):
     """
-    The function calculates the percentage of an artist's songs that features words from the expanded query.
-    The function filters the df to only include the rows where the artist column matches the input artist_name
-    and finds the total number of songs by the artist. Afterwards, it will find how many songs by the artist
-    features words from the expanded query, by iterating over each song's text in a loop. Finally, it will
-    caculate the percentage of songs with words from expanded query.  
-    The function returns the total number of songs by the artist, the number of songs containing the query words,
-    and the percentage of songs containing the query words.
+    The function calculates the percentage of an artist's songs that features words from the expanded
+    query. The function filters the df to only include the rows where the artist column matches the input
+    artist_name and finds the total number of songs by the artist. Afterwards, it will find how many songs
+    by the artist features words from the expanded query, by iterating over each song's text. Finally, it
+    will caculate the percentage of songs with words from the query. The function returns the total number
+    of songs by the artist, the number of songs containing the query words, and the percentage of songs
+    containing the query words.
     """
     tracker.start_task("calculate percentage")
     artist_songs = df[df['artist'].str.lower() == artist_name]
@@ -129,9 +129,9 @@ def calculate_percentage(df, artist_name, similar_words, tracker):
 
 def save_results_to_df(df, target_word, artist_name, similar_words, total_songs, songs_with_words, percentage, tracker):
     """
-    The function saves the results to a dataframe and .csv file. It checks if the .csv file exists. If not, 
-    it writes a new dataframe with headers. If it does exist, it simplt append the new row to the existing
-    .csv file witout header. Also, it prints the results in the terminal output.
+    The function saves the results as a .csv file. It checks if the .csv file already exists. If not, 
+    it writes a new dataframe with headers. If it does exist, it simply append the new row to the existing
+    .csv file witout a header. Also, it prints the results in the terminal output.
     """
     tracker.start_task("save results")
     new_row = {
@@ -155,8 +155,8 @@ def save_results_to_df(df, target_word, artist_name, similar_words, total_songs,
 
 def visualize_multiple_words_from_df(model, df, outpath, tracker, topn = 10):
     """
-    The function visualizes all the target words and their query (list of similar words) from the saved
-    dataframe using t-SNE dimensionality reduction. The plot will show the relations between the words
+    The function visualizes all the target words and their query from the saved dataframe
+    using t-SNE dimensionality reduction. The plot will show the relations between the words
     in a lower-dimensional space. It will be saved to a specified outpath.
     """
     tracker.start_task("visualise query")
