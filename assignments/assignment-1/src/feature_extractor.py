@@ -57,9 +57,9 @@ def count_pos(doc):
 
 def rel_freq(count, len_doc): 
     """
-    The function calculates the relative frequency of a count within a document.
-    The function takes the count of a POS tag and the total number of tokens in the given text,
-    while returns the relative frequency (scaled by 10,000) of the count within the document.
+    The function calculates the relative frequency of a count within a document. The function
+    takes the count of a POS tag and the total number of tokens in the given text, while
+    returns the relative frequency (scaled by 10,000) of the count within the document.
     """
     return round((count/len_doc * 10000), 2)
 
@@ -93,8 +93,8 @@ def no_unique_ents(doc):
 def process_text(filepath, nlp):
     """ 
     The function iterates over the text files from a given filepath and extracts linguistic features.
-    The function creasea a Pandas DataFrame to store and append the extracted features for each file.
-    Finally, the dataframes with the extracted features are saved as .csv files.
+    The function creates a Pandas DataFrame to store and append the extracted features for each file.
+    Finally, the dataframes are saved as .csv files in the out folder.
     """
     for subfolder in sorted(os.listdir(filepath)):
         subfolder_path = os.path.join(filepath, subfolder)
@@ -141,8 +141,8 @@ def combine_df(dataframes):
 
 def plot_word_class(combined_df, outpath):
     """
-    The function plots the relative frequency of word classes (noun, verb, adverb, adjective) across subfolders.
-    The plot will be saved to the specified outpath.
+    The function plots the relative frequency of word classes (noun, verb, adverb, adjective)
+    across subfolders. The plot are saved to the specified outpath.
     """
     aggregated_df = combined_df.groupby('subfolder').agg({'RelFreq NOUN': 'sum',
                                                         'RelFreq VERB': 'sum',
@@ -173,8 +173,8 @@ def plot_word_class(combined_df, outpath):
 
 def plot_entities(combined_df, outpath):
     """
-    The function plots the average number of unique entities (PERSON, LOC, ORG) across subfolders.
-    The plot will be saved to the specified outpath.
+    The function plots the average number of unique entities (PERSON, LOC, ORG) across
+    subfolders. The plot are saved to the specified outpath.
     """
     cols = ['No. Unique PER', 'No. Unique LOC', 'No. Unique ORG']
     avg_ents = combined_df.groupby('subfolder')[cols].mean().reset_index()
