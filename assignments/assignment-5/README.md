@@ -52,7 +52,7 @@ To evaluate the environmental impact of the portfolio exam, it is first identifi
 |Assignment 4|0.02275|
 
 <p align = "center">
-    <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-5/plots/Emissions_per_Assignment.png" width = "800">
+    <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-5/plots/Emissions_per_Assignment.png" width = "600">
 </p>
 
 It's evident that assignment 4 emits significantly more CO₂eq compared to the others. Following is assignment 2, with less than half the emissions, assignments 1, and assignment 3.
@@ -60,13 +60,13 @@ It's evident that assignment 4 emits significantly more CO₂eq compared to the 
 To assess which specific subtaks within each assignment contributed the most to emissions in terms of CO₂eq, the emissions of individual subtasks across assignments are visualized:
 
 <p align = "center">
-    <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-5/plots/Subtask_Emissions_across_Assignments.png" width = "800">
+    <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-5/plots/Subtask_Emissions_across_Assignments.png" width = "600">
 </p>
 
 It is clear that certain tasks within each assignment contributed significantly to the CO₂ emission. In assignment 1, the subtask 'data processing', which involves transforming raw data into insights by extracting linguistic features, emerged as the primary contributor to emissions. For assignment 2, both 'hyperparameter tuning' and 'permutation testing' played central roles. Hyperparameter, especially conducted using GridSearch, and permutation testing proved to be as computationally heavy as expected.
 
 <p align = "center">
-    <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-5/plots/Emissions_per_pipeline_a2.png" width = "800">
+    <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-5/plots/Emissions_per_pipeline_a2.png" width = "600">
 </p>
 
 In assignment 3, it was notably the loading of the 'glove-wiki-gigaword-50' word embedding model that predominantly contributed to emissions. Finally, for assignment 4 'model prediction' emits the most, here a pre-trained text classification model from HuggingFace predicts emotions for all sentences in a huge dataframe. 
