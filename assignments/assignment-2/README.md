@@ -3,7 +3,7 @@
 
 This assignment is designed to train two benchmark Machine Learning (ML) classifiers on text data and assess their performances using ```scikit-learn```. The repository will utilize supervised ML techniques on a binary classification task, where a Logistic Regression (LR) and Neural Network (NN) will learn patterns from labelled data to make predictions on new, unseen data. 
 
-The two ML models will be trained to classify whether news data is "real" or "fake" by doing the following steps:
+The two ML models will be trained to classify whether news data is "real" or "fake" by performing the following steps:
 1. Data preparation (```vectorizer.py```):
     - Loads and splits the data into training and testing sets using an 80-20 split.
     - Defines and saves a TF-IDF vectorizer object. 
