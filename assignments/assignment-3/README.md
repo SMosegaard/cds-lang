@@ -58,8 +58,6 @@ $ source run.sh -w {'target_word'} -a {'artist_name'}
 ``` 
 The inputs will be converted to lowercase, so it is irrelevant whether it is spelled with or without capital letters.
 
-Based on the input word, the pre-trained word embedding model will find 10 closely related words. Afterwards, the percentage of songs by the given artist that features the words from the expanded query will be calculated. 
-
 Upon completion, a message will be displayed in the terminal output, confirming that the results have been successfully saved to the ```out``` folder.
 
 ## Results
