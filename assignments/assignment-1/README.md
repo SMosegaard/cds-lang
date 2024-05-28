@@ -12,15 +12,13 @@ Specifically, the project will retrieve linguistic features from the Uppsala Stu
     - Calculates the relative frequency per 10,000 words of each POS
     - Counts the number of unique entities (persons, locations, organisations)
 - Saves individual dataframes for each subfolder in the ```out``` folder.
-- Visualizes the amount of entities and the relative frequency of word types across subfolders. Saves the plots in the ```out``` folder.
+- Visualizes the number of entities and the relative frequency of word types across subfolders. Saves the plots in the ```out``` folder.
 
 To better understand the code, each function in the script ```feature_extractor.py`` will include a brief descriptive text.
 
 ## Data
 
-In this repository, the linguistic features will be extracted from a series of essays. The dataset is a collection of English essays written by Swedish university students at the Uppsala University. The corpus consists of 1,489 essays with an average length of 820 words.
-
-The essays are written over three different terms, which is reflected by the name of the subfolder (a, b, and c). The essays encompass the period from 1999 to 2001.  
+In this repository, the linguistic features will be extracted from a series of essays. The dataset is a collection of English essays written by Swedish university students at the Uppsala University. The corpus consists of 1,489 essays with an average length of 820 words. The essays are written over three different terms, which is reflected by the name of the subfolder (a, b, and c). The essays encompass the period from 1999 to 2001.  
 
 You can download the dataset [here](https://ota.bodleian.ox.ac.uk/repository/xmlui/handle/20.500.12024/2457) and place it in the ```in``` folder of this repository. Remember to unzip the data before proceeding with the analysis.
 
@@ -61,9 +59,9 @@ Upon completion, a message will be displayed in the terminal output, confirming 
 
 ## Results
 
-The code presented is designed to extract and explore linguistic characteristics of a corpus using the NLP technique spaCy. It calculates the relative frequency of nouns, verbs, adjectives, and adverbs per 10,000 words, as well as the total number of unique persons (PER), locations (LOC), and organizations (ORG) mentioned in each text. 
+The code presented is designed to extract and explore linguistic characteristics of a corpus using the NLP technique spaCy. It calculates the relative frequency of nouns, verbs, adjectives, and adverbs per 10,000 words, as well as the total number of unique persons (PER), locations (LOC), and organizations (ORG) mentioned in each essay. 
 
-Utilizing the USE Corpus, the code successfully generates tables summarizing the linguistic features for each text. To illustrate the results obtained from four essays within the corpus, see the table below:
+When utilizing the USE Corpus, the code successfully generates tables summarizing the linguistic features for each text. Results obtained from four essays within the corpus are demonstrated:
 
 |Filename|RelFreq NOUN|RelFreq VERB|RelFreq ADJ|RelFreq ADV|Unique PER|Unique LOC|Unique ORG|
 |---|---|---|---|---|---|---|---|
@@ -71,7 +69,6 @@ Utilizing the USE Corpus, the code successfully generates tables summarizing the
 |1071.a1.txt|1396.71|1302.82|622.07|481.22|3|0|4|
 |0191.a1.txt|1251.49|1358.76|750.89|679.38|0|0|2|
 |3045.a1.txt|1144.58|1385.54|622.49|401.61|0|1|0|
-|etc|---|---|---|---|---|---|---|
 
 To derive insights from the results, the various features are illustrated:
 
