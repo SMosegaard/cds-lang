@@ -1,7 +1,7 @@
 # Assignment 3 - Query Expansion with Word Embeddings
 *By Sofie Mosegaard, 21-03-2023*
 
-This repository demonstrates the use of word embeddings for query expansion and analysis of song lyrics. The assignment is designed to explore the relationship between a target word and an artist's song lyrics by leveraging ```Gensim```'s word embedding model to expand the query and calculate the percentage of songs containing related words. 
+This repository demonstrates the use of word embeddings for query expansion and analysis of song lyrics. The project is designed to explore the relationship between a target word and an artist's song lyrics by leveraging ```Gensim```'s word embedding model to expand the query and calculate the percentage of songs containing related words. 
 
 An overview of the process:
 
@@ -58,7 +58,7 @@ $ source run.sh -w {'target_word'} -a {'artist_name'}
 ``` 
 The inputs will be converted to lowercase, so it is irrelevant whether it is spelled with or without capital letters.
 
-Based on the input word, a pre-trained word embedding model will find 10 closely related words. Afterwards, the percentage of songs by the given artist that features the words from the expanded query will be calculated. 
+Based on the input word, the pre-trained word embedding model will find 10 closely related words. Afterwards, the percentage of songs by the given artist that features the words from the expanded query will be calculated. 
 
 Upon completion, a message will be displayed in the terminal output, confirming that the results have been successfully saved to the ```out``` folder.
 
@@ -74,15 +74,15 @@ The code facilitates query expansion with word embeddings. It integrates Gensim'
 |love|abba|dream, life, me, my, mind, loving, wonder, soul, crazy, happy|113|113|100|
 |baby|justin bieber|babies, boy, girl, newborn, pregnant, mom, child, toddler, mother, cat|131|82|62.6|
 
-The findings present the percentage of artist's songs contain words related to a given target word. Despite the implementation of the nltk lemmatization technique, some variations in word conjugation were still observed, such as "skies" associated with 'sky' and 'loving' with 'love'.
+The findings present the percentage of artists' songs containing words related to a given target word. Despite the implementation of the nltk lemmatization technique, some variations in word conjugation were still observed, such as "skies" associated with the target word 'sky' and 'loving' with 'love'.
+
+To visualize the relationships between target words and their queries, a t-SNE plot was generated. 
 
 <p align = "center">
     <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-3/out/t-SNE_nQueries_from_df.png" width = "600">
 </p>
 
-To visualize the relationships between target words and their queries, a t-SNE plot was generated. 
-
-It illustrates the semantic similarities and differences among words. Certain clusters overlap while others remain distinct. For instance, the target words "hello" and "bitch" reveal an overlap in their clusters, indicating a shared semantic context, while the clusters "thriller" and "friday" appear distinctly separate, suggesting unique semantic associations for these target words.
+The plot illustrates the semantic similarities and differences among words. Certain clusters overlap while others remain distinct. For instance, the target words "hello" and "bitch" reveal an overlap in their clusters, indicating a shared semantic context, while the clusters "thriller" and "friday" appear distinctly separate, suggesting unique semantic associations for these target words.
 
 It is important to note that the visualisation serves as a representation of the semantic relationships within the results and does not directly illustrate the inner workings of the pre-trained word embedding model. Nonetheless, it provides valuable insights into the model's ability to capture the semantic context of the target words and their related queries.
 
@@ -90,11 +90,11 @@ It is important to note that the visualisation serves as a representation of the
 
 The choice of the pre-trained word embedding model significantly influences the results obtained from query expansion. In this case, the Gensim 'glove-wiki-gigaword-50' model is trained on Wikipedia data, which will exhibit some biases. As the training corpus Wikipedia primarily contains factual information, it will influence the semantic relationships captured by the model.
 
-For example, when analysing the songs of Katy Perry with the target word 'friday' and Justin Bieber with word 'baby', the model returns other weekdays and words related to children and pregnancy. These results are very reasonable given Wikipedia's focus on factual information and reflects the general context in which the words are used on Wikipedia. Thus, it is important to acknowledge that the model does not capture all semantic nuances, especially not the creative language commonly found in song lyrics. If the model were trained on web data or personal writings, the results could be significantly different. Instead, the model might associate 'friday' with words like "party, friends, beer", and 'baby' with more romantic or sexual connotations for Justin Bieber's songs.
+For example, when analysing the songs of Katy Perry with the target word 'friday' and Justin Bieber with word 'baby', the model returns other weekdays and words related to children and pregnancy. These results are very reasonable given Wikipedia's focus on factual information and reflects a general context in which the words are used on Wikipedia. Thus, it is important to acknowledge that the model does not capture all semantic nuances, especially not the creative language commonly found in song lyrics. If the model were trained on web data or personal writings, the results could be significantly different. Instead, the model might associate 'friday' with words like "party, friends, beer", and 'baby' with more romantic or sexual connotations.
 
 This limitation shows the importance of the domain of the employed model. The relevance and accuracy of the query expansion results could potentially be improved by fine-tuning the model on domain-specific data such as song lyrics.
 
-Another limitation observed is the model's tendency to return different conjugations or variations of the same word. While these words are semantically related, they do not contribute to expanding the query in a meaningful way. In addition to the implemented lemmatization technique, it would have been relevant to extract the root form of the returned word and remove identical or very similar words. By doing so, there will be room for real synonyms and related words, that can enhance the query expansion and elicit more interesting results!
+Another limitation observed is the model's tendency to return different conjugations or variations of the same word. While these words are semantically related, they do not contribute to expanding the query in a meaningful way. In addition to the implemented lemmatization technique, it would have been relevant to extract the root form of the returned word and remove identical or very similar words. By doing so, there will be room for real synonyms and related words, that could enhance the query expansion and elicit more interesting results!
 
 Overall, the repository presents a valuable tool for researchers and music enthusiasts, as it enables them to explore the thematic trends within song lyrics through the lens of word embeddings. The code can be applied to other text datasets beyond music. However, it is important to acknowledge the limitations of the current model and consider fine-tuning or selecting a model trained on more similar data to ensure contextually relevant results.
 
