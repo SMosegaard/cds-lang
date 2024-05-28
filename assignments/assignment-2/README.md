@@ -20,8 +20,8 @@ The two ML models will be trained to classify whether news data is "real" or "fa
     - Evaluates the trained classifiers on unseen test data.
 7. Generate results:
     - Generates classification reports and saves them further analysis.
-    - For the NN classifier, the training loss and validation accuracy curves will be plotted and saved.
     - For the LR classifier, the SHAP framework will be employed to create and save a summary plot of influential features. 
+    - For the NN classifier, the training loss and validation accuracy curves will be plotted and saved.
     - Optionally, conducts permutation tests to assess statistical significance of the classifiers' performance.
 
 To better understand the code, all functions in the scripts ```src/XXX.py``` will include a brief descriptive text.
@@ -72,7 +72,7 @@ $ source run.sh -gs {yes/no} -pt {yes/no}
 
 The inputs will be converted to lowercase, so it is irrelevant whether it is spelled with or without capital letters.
 
-Both classifiers will be executed sequentially. To run a specific model, you can uncomment the corresponding script within the run.sh file.
+Both classifiers will be executed sequentially with the same specifications. To run a specific model, you can uncomment the corresponding script within the run.sh file.
 
 Upon completion, a message will be displayed in the terminal output, confirming that the results have been successfully saved to the ```out``` folder.
 
@@ -87,9 +87,9 @@ The table below displays the performance of the logistic regression and neural n
 |NN_default {'hidden_layer_sizes': 100, 'activation': 'relu', 'solver': 'adam', 'learning_rate_init': 0.001}|0.89|0.89|0.89|
 |NN_GridSearch {'hidden_layer_sizes': '150', 'activation': 'relu', 'solver': 'adam', 'learning_rate_init': 0.01}|0.90|0.90|0.90|
 
-*The full classification reports and visualisations can be found in the ```out``` folder.*
+*The full classification reports and all visualisations can be found in the ```out``` folder.*
 
-Both the LR and NN classifiers with default parameters archives high average accuracy scores of 89-90% with balanced performance between both classes. When tuning the hyperparameters, no significant improvements in classification accuracy is detected.
+Both the LR and NN classifiers with default parameters archives high average accuracy scores of 89% with balanced performance between both classes. When tuning the hyperparameters, no significant improvements in classification accuracy is detected.
 
 The training loss and validation accuracy curves of the NN classifiers, respectively with default and tuned parameters, were visualized to assess the models training process and performance:
 
@@ -107,9 +107,9 @@ Although both benchmark models prove excellent performance in the binary classif
     <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-2/out/NN_permutation.png" width = "400">
 </p>
 
-The permutation tests confirmed that the models are statistically independent, and the obtained results are statistically better than expected by chance.
+The permutation tests confirmed that the models are statistically independent and the obtained results are statistically better than expected by chance.
 
-Finally, the methodology SHAP (SHapley Additive exPlanations) was introduced to provide an overview of the most important features and explain the predictions of the classifier. The impact of the most influential features is summarised:
+Finally, the framework SHAP (SHapley Additive exPlanations) was introduced to provide an overview of the most important features and explain the predictions of the classifier. The impact of the most influential features is summarised:
 
 <p align = "center">
     <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-2/out/LR_shap_summary.png" width = "400">
@@ -125,9 +125,9 @@ The SHAP framework is not compatible with MLP from scikit-learn, in which the su
 
 The results of this study provide insights into the performance of two benchmark models in a binary classification task. Despite the inherent complexity of the NN architecture, both models demonstrated comparable performance. The superior results suggest that both models are well-suited for the binary classification task at hand. 
 
-Several factors could contribute to the similar performance of the two models. Firstly, the binary classification task was relatively straightforward and may not have been sufficiently complex to fully exploit the capabilities of the NN model. This allowed the simpler LR algorithm to learn and generalize effectively. Additionally, the data was well-structured and cleaned, which meant that the LR classifier could capture the underlying patterns without the need for more complex modeling. 
+Several factors could contribute to the similar performance of the two models. Firstly, the binary classification task was relatively straightforward and may not have been sufficiently complex to fully exploit the capabilities of the NN model. This allowed the simpler LR algorithm to learn and generalize effectively. Additionally, the data was well-structured and cleaned, which meant that the LR classifier could capture the underlying patterns without the need for more complex modelling. 
 
-A slight improvement was observed when implementing GridSearch for hyperparameter tuning. This could be due to cross validation, that improves the robustness of the model. However, given the simplicity of the task, the quality of the dataset, and the almost identical results, it is difficult to derive the real effect of the individual parameters.
+A slight improvement was observed when implementing GridSearch for hyperparameter tuning. This could be due to cross validation, that improved the robustness of the model. However, given the simplicity of the task, the quality of the dataset, and the almost identical results, it is difficult to derive the real effect of the individual parameters.
 
 The findings demonstrate the importance of model selection based on the specific problem domain and data characteristics. While NN models have gained popularity due to their impressive performance in various complex tasks, simpler models like LR should not be overlooked. Future work could involve exploring more complex datasets to identify scenarios where NNs superior performance becomes evident.
 
