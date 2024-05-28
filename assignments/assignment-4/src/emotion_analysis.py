@@ -55,8 +55,8 @@ def save_df_to_csv(df, tracker, csv_outpath):
 def count_emotions(df, tracker):                            
     """
     The function counts the occurrences of each predicted emotion for each season in the input dataframe.
-    A dataframe showing the count and relative frequency of each predicted emotion for each season will
-    be returned and used for plotting.
+    The dataframe will show the count and relative frequency of each predicted emotion for each season. It
+    will be returned and used for plotting.
     """
     tracker.start_task("reshape data")
     season_list = df["Season"].unique()
