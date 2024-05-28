@@ -47,8 +47,8 @@ def parser():
 
 def load_vectorised_data(tracker):
     """
-    The function loads the vectorized data if it exists. If it does not, it runs vectorizer.py using the
-    Python subprocess module to create it. Then, it loads the created vectorized data
+    The function loads the vectorized data if it exists. If it does not, it runs the vectorizer.py 
+    script using the Python subprocess module to create it. Then, it loads the created vectorized data.
     """
     tracker.start_task("Load vectorized data")
     if not os.path.isfile( 'models/vectorized_data.pkl'):
@@ -64,8 +64,8 @@ def load_vectorised_data(tracker):
 
 def define_classifier(tracker):
     """
-    The function defines the neural network classifier with default parameters.
-    The parameters are therefore simply specified for illustration purposes only.
+    The function defines the LR classifier with default parameters.
+    The parameters are simply specified for illustration purposes only.
     """
     tracker.start_task("Define classifier")
     classifier = LogisticRegression(tol = 0.0001,
@@ -123,7 +123,7 @@ def fit_classifier(classifier, X_train, y_train, tracker):
 
 def evaluate_classifier(classifier, X_train_features, y_train, X_test_features, y_test, tracker, outpath):
     """
-    The function evaluates the trained classifier on new, unseen data. This includes plotting calculating
+    The function evaluates the trained classifier on new, unseen data. This includes calculating
     a classification report, which will be saved to a specified outpath.
     """
     tracker.start_task("Evaluate classifier")
@@ -145,9 +145,9 @@ def evaluate_classifier(classifier, X_train_features, y_train, X_test_features, 
 
 def shap_explainer(classifier, X_train_features, X_test_features, feature_names, tracker):
     """
-    The function uses the SHAP framework to explain the predictions of the classifier by generating a SHAP
-    summary plot that visualizes the impact of each feature on the model's output.
-    The plot will be saved to a specified outpath.
+    The function uses the SHAP framework to explain the predictions of the classifier by
+    generating a SHAP summary plot that visualizes the impact of each feature on the
+    model's output. The plot will be saved to a specified outpath.
     """
     tracker.start_task("Shap")
     explainer = shap.LinearExplainer(classifier, X_train_features)

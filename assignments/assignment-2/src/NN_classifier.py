@@ -45,8 +45,8 @@ def parser():
 
 def load_vectorised_data(tracker):
     """
-    The function loads the vectorized data if it exists. If it does not, it runs vectorizer.py using the
-    Python subprocess module to create it. Then, it loads the created vectorized data
+    The function loads the vectorized data if it exists. If it does not, it runs the vectorizer.py 
+    script using the Python subprocess module to create it. Then, it loads the created vectorized data.
     """
     tracker.start_task("Load vectorized data")
     if not os.path.isfile( 'models/vectorized_data.pkl'):
@@ -62,10 +62,10 @@ def load_vectorised_data(tracker):
 
 def define_classifier(tracker):
     """
-    The function defines the neural network classifier with default parameters. The parameters are therefore
-    simply specified for illustration purposes only.
-    Additionally, 10% of the training data will be used for validation. When the validation score is
-    not improving during training, the training will stop due to early stopping.
+    The function defines the neural network classifier with default parameters. The
+    parameters are simply specified for illustration purposes only. Additionally,
+    10% of the training data will be used for validation. When the validation score
+    is not improving during training, the training will stop due to early stopping.
     """
     tracker.start_task("Define classifier")
     classifier = MLPClassifier(hidden_layer_sizes=(100,),
@@ -75,7 +75,6 @@ def define_classifier(tracker):
                                 early_stopping = True,
                                 random_state = 123,
                                 verbose = True)
-
     emissions_2_NN_define_classifier = tracker.stop_task()
     return classifier
 
@@ -120,7 +119,7 @@ def fit_classifier(classifier, X_train, y_train, tracker):
 
 def evaluate_classifier(classifier, X_train_features, y_train, X_test_features, y_test, tracker, outpath):
     """
-    The function evaluates the trained classifier on new, unseen data. This includes plotting calculating
+    The function evaluates the trained classifier on new, unseen data. This includes calculating
     a classification report, which will be saved to a specified outpath.
     """
     tracker.start_task("Evaluate classifier")
@@ -168,7 +167,7 @@ def plot_loss_curve(classifier, tracker, outpath):
 
 def permutation_test(classifier, X_train_features, y_train, tracker, outpath):
     """
-    The function performs permutation test on the LR classifier to assess statistical significance
+    The function performs permutation test on the NN classifier to assess statistical significance
     of classifier's performance. The permutation test will be plotted and saved to a specified outpath.
     """
     tracker.start_task("Permutation test")

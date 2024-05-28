@@ -21,9 +21,9 @@ def emissions_tracker(outpath):
 
 def data_Load_split(tracker, filepath):
     """
-    The function loads the .csv file from the specified folder path and extracts the 'text'
-    column as features and the 'label' column as labels. Then, it splits the data into training
-    and testing sets using an 80-20 split.
+    The function loads the .csv file from the specified filepath and extracts the 'text'
+    column as features and the 'label' column as labels. Then, it splits the data into
+    training and testing sets using an 80:20 split.
     """
     tracker.start_task("Load and split data")
     data = pd.read_csv(filepath)
@@ -39,7 +39,7 @@ def define_vectorizer(tracker, vectorizer_path):
     """
     The function defines a TF-IDF vectorizer object. The vectorizer parameters include unigrams and bigrams,
     lowercase conversion, removal of the most common (top 5%) and least common (bottom 5%) words, and
-    maximum features. The vectorizer will then be saved to a specified outpath.
+    maximum features. The vectorizer will be saved to a specified outpath.
     """
     tracker.start_task("Define vectorizer")
     vectorizer = TfidfVectorizer(ngram_range = (1,2), 
