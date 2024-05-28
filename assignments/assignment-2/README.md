@@ -13,7 +13,7 @@ The two ML models will be trained to classify whether news data is "real" or "fa
 3. Model definition
     - Defines the LR and NN (i.e., the Multi-Layer Perceptron (MLP)) classifier with default parameters using a standard pipeline of scikit-learn.
 4. Hyperparameter tuning:
-    - Optionally, performs GridSearch to tune the hyperparameters through k-fold cross-validation with 5 folds to improve classification accuracy and robustness. For the LR classifier, the tolerance, maximum number of iterations, solver, and penalty will be tuned, while the number of hidden layers, activation, solver, and initial learning rate will be tuned for the NN classifier. 
+    - Optionally, performs GridSearch to tune the hyperparameters through k-fold cross-validation with 5 folds to improve robustness and classification accuracy. For the LR classifier, the tolerance, maximum number of iterations, solver, and penalty will be tuned, while the number of hidden layers, activation, solver, and initial learning rate will be tuned for the NN classifier. 
 5. Model training:
     - Fits the classifiers with default or tuned parameters to the training data.
 6. Model evaluation:
@@ -53,7 +53,7 @@ To ensure reproducibility and facilitate collaboration, follow these steps:
 ```python
 $ git clone "https://github.com/SMosegaard/cds-lang/tree/main/assignments/assignment-2"
 ```
-2. Navigate into the 'assignment-2' folder in your terminal:
+2. Navigate into the 'assignment-2' folder:
 ```python
 $ cd assignment-2
 ```
@@ -72,7 +72,7 @@ $ source run.sh -gs {yes/no} -pt {yes/no}
 
 The inputs will be converted to lowercase, so it is irrelevant whether it is spelled with or without capital letters.
 
-Both classifiers will be executed sequentially with the same specifications. To run a specific model, you can uncomment the corresponding script within the run.sh file.
+Both classifiers will be executed sequentially with the same specifications. To run a specific model, you are free to uncomment the corresponding script in the run.sh file.
 
 Upon completion, a message will be displayed in the terminal output, confirming that the results have been successfully saved to the ```out``` folder.
 
