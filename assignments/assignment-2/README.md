@@ -24,7 +24,7 @@ The two ML models will be trained to classify whether news data is "real" or "fa
     - For the NN classifier, the training loss and validation accuracy curves will be plotted and saved.
     - Optionally, conducts permutation tests to assess statistical significance of the classifiers' performance.
 
-To better understand the code, all functions in the scripts ```src/XXX.py``` will include a brief descriptive text.
+To better understand the code, all functions in the scripts inside the ```src``` folder will include a brief descriptive text.
 
 ## Data
 
@@ -51,7 +51,7 @@ To ensure reproducibility and facilitate collaboration, follow these steps:
 
 1.  Clone the repository using the following command:
 ```python
-$ git clone "https://github.com/SMosegaard/cds-lang/tree/main/assignments/assignment-2"
+$ git clone "https://github.com/SMosegaard/cds-lang"
 ```
 2. Navigate into the 'assignment-2' folder:
 ```python
@@ -72,7 +72,7 @@ $ source run.sh -gs {yes/no} -pt {yes/no}
 
 The inputs will be converted to lowercase, so it is irrelevant whether it is spelled with or without capital letters.
 
-Both classifiers will be executed sequentially with the same specifications. To run a specific model, you are free to uncomment the corresponding script in the run.sh file.
+Both classifiers will be executed sequentially with the same specifications. To run a specific model, you are free to uncomment the corresponding Python script in the run.sh file.
 
 Upon completion, a message will be displayed in the terminal output, confirming that the results have been successfully saved to the ```out``` folder.
 
@@ -89,18 +89,18 @@ The table below displays the performance of the logistic regression and neural n
 
 *The full classification reports and all visualisations can be found in the ```out``` folder.*
 
-Both the LR and NN classifiers with default parameters archives high average accuracy scores of 89% with balanced performance between both classes. When tuning the hyperparameters, no significant improvements in classification accuracy is detected.
+Both classifiers with default parameters archive high average accuracy scores of 89% with balanced performance between both classes. When tuning the hyperparameters, no significant improvements in classification accuracies are detected.
 
 The training loss and validation accuracy curves of the NN classifiers, respectively with default and tuned parameters, were visualized to assess the models training process and performance:
 
 <p align = "center">
-    <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-2/out/NN_loss_curve.png" width = "400">
-    <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-2/out/NN_loss_curve_GS.png" width = "400">
+    <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-2/out/NN_loss_curve.png" width = "500">
+    <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-2/out/NN_loss_curve_GS.png" width = "500">
 </p>
 
 The decreasing loss curves and increasing validation accuracies demonstrate that both models are learning effectively. As the trainings progress, the models improve their understanding of the training data, while still being able to generalize its knowledge to new, unseen data. However, the model with default parameters do show the best fit.
 
-Although both benchmark models prove excellent performance in the binary classification tasks and significantly surpasses the chance level of 50%, it is relevant to assess whether the results are statistically significant. Therefore, the models were permutation tested:
+Although both benchmark models prove excellent performance in the binary classification tasks and significantly surpasses the chance level of 50%, it is relevant to assess whether the results are statistically significant. Therefore, the models were permutation tested with 100 permutations and 5-fold cross validation:
 
 <p align = "center">
     <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-2/out/LR_permutation.png" width = "400">
