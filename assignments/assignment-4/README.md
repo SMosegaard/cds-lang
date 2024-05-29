@@ -11,11 +11,11 @@ Specifically, the project will conduct the emotion analysis on the TV series 'Ga
 - Saves the dataframe with predicted emotions as .csv in the ```out``` folder
 - Visualises the relative frequency of all emotions across seasons and saves the plots in the ```out``` folder
 
-To better understand the code, all functions in the script ```src/emotion_analysis.py`` will include a brief descriptive text.
+To better understand the code, all functions in the script ```src/emotion_analysis.py``` will include a brief descriptive text.
 
 ## Data
 
-The project objective will be performed on scripts from the TV show 'Game of Thrones'. The scripts have been segmented into lines, comprising a total of 23,911 rows. Each rows includes metadata, indicating who said the line, what episode it came from, and the season of the line.
+The project objective will be performed on scripts from the TV show 'Game of Thrones'. The scripts have been segmented into sentences, comprising a total of 23,911 rows. Each rows includes metadata, indicating who said the line, what episode it came from, and the season of the line.
 
 You can download the dataset [here](https://www.kaggle.com/datasets/albenft/game-of-thrones-script-all-seasons?select=Game_of_Thrones_Script.csv) and place it in the ```in``` folder. Remember to unzip the data before proceeding with the analysis.
 
@@ -37,7 +37,7 @@ To ensure reproducibility and facilitate collaboration, follow these steps:
 
 1.  Clone the repository using the following command:
 ```python
-$ git clone "https://github.com/SMosegaard/cds-lang/tree/main/assignments/assignment-4"
+$ git clone "https://github.com/SMosegaard/cds-lang"
 ```
 2. Navigate into the 'assignment-4' folder:
 ```python
@@ -58,7 +58,7 @@ Upon completion, a message will be displayed in the terminal output, confirming 
 
 The code facilitates computational text analysis to extract meaningful information in terms of emotion scores. It integrates HuggingFace's model 'emotion-english-distilroberta-base' and allows its users to assess the series emotional profile and how it changes over the seasons. Then, it plots the distribution of all emotions in all seasons and the relative frequency of each emotion across all seasons.
 
-When utilizing the script of the 8 seasons of 'Game of Thrones', it returns the following results:
+When utilizing the script of all 8 seasons of 'Game of Thrones', it returns the following results:
 
 <p align = "center">
     <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-4/out/emotion.png" width = "800">
@@ -78,7 +78,7 @@ Surprise and disgust are most prevalent in the earlier seasons, particularly in 
 
 ## Discussion
 
-First of all, it's important to acknowledge the predictive nature of the emotional labels. As human language is nuanced and complex, sentences can convey multiple emotions simultaneously. Therefore, the emotion score with the highest value for a given sentence is selected as the emotional label. This approach might also explain the prominence of the emotions neutral and anger. As emotions can be discrete and subtle, many sentences might possess some neutrality. Contrary, the emotion anger is very dominant compared to for example fear, that could be expressed very differently.
+First of all, it's important to acknowledge the predictive nature of the emotional labels. As human language is nuanced and complex, sentences can convey multiple emotions simultaneously. Therefore, the emotion score with the highest value for a given sentence is selected as the emotional label. This approach might explain the prominence of the emotions neutral and anger. As emotions can be discrete and subtle, many sentences might possess some neutrality. Furthermore, the emotion anger is very dominant, with which it will get a high emition score, compared to for example fear, that could be expressed very differently.
 
 It would have been interesting to remove the predominant neutral class or simply plot the emotions independently, This could possibly shed light on nuances that might be obscured by the dominant presence of the emotion neutral and possibly offer further insights into the emotional landscape of the series.
 
