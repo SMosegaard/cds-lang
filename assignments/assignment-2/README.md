@@ -28,7 +28,7 @@ To better understand the code, all functions in the scripts inside the ```src```
 
 ## Data
 
-In this repository, the two classification models will be trained on the 'Fake or Real News dataset'. As the classification task is binary, the two classes are whether the news is real or fake.
+In this repository, the two classification models will be trained on the 'Fake or Real News dataset'. As the classification task is binary, the two classes are whether a news article is real or fake.
 
 You can download the dataset [here](https://www.kaggle.com/datasets/jillanisofttech/fake-or-real-news) and place it in the ```in``` folder. Remember to unzip the data before proceeding with the analysis.
 
@@ -115,7 +115,7 @@ Finally, the framework SHAP (SHapley Additive exPlanations) was introduced to pr
     <img src = "https://raw.githubusercontent.com/SMosegaard/cds-lang/main/assignments/assignment-2/out/LR_shap_summary.png" width = "400">
 </p>
 
-The plot illustrate which words are most influential in determining whether the news is real or fake and how they affect the model's predictions. Each point represents a data record, with features ranked by importance from most to least significant. Higher feature values typically have a more positive impact on the prediction.
+The plot illustrate which words are most influential in determining whether a news article is real or fake and how they affect the model's predictions. Each point represents a data record, with features ranked by importance from most to least significant. Higher feature values typically have a more positive impact on the prediction.
 
 The words "2016" and "october" have numerous red points with negative SHAP values, which suggest that the words contribute to predicting the news as "fake." In contrast, words like "said" and "but" often appear more frequently in articles that the model predicts as "real" news.
 
@@ -127,7 +127,7 @@ The results of this study provide insights into the performance of two benchmark
 
 Several factors could contribute to the similar performance of the two models. Firstly, the binary classification task was relatively straightforward and may not have been sufficiently complex to fully exploit the capabilities of the NN model. This allowed the simpler LR algorithm to learn and generalize effectively. Additionally, the data was well-structured and cleaned, which meant that the LR classifier could capture the underlying patterns without the need for more complex modelling. 
 
-A slight improvement was observed when implementing GridSearch for hyperparameter tuning. This could be due to cross validation, that improved the robustness of the model. However, given the simplicity of the task, the quality of the dataset, and the almost identical results, it is difficult to derive the real effect of the individual parameters.
+A slight improvement was observed when implementing GridSearch for hyperparameter tuning. This could be due to cross validation, that improved the robustness of the model. However, given the simplicity of the task, the quality of the dataset, and the almost identical results, it is difficult to derive the real effect of the individual parameters. However, as the hyperparameter is quite computationally intensive, one should think about whether the slight performance advantages outweigh the extra expenses.
 
 The findings demonstrate the importance of model selection based on the specific problem domain and data characteristics. While NN models have gained popularity due to their impressive performance in various complex tasks, simpler models like LR should not be overlooked. Future work could involve exploring more complex datasets to identify scenarios where NNs superior performance becomes evident.
 
