@@ -14,7 +14,7 @@ Specifically, the project will retrieve linguistic features from the Uppsala Stu
 - Saves individual dataframes for each subfolder in the ```out``` folder.
 - Visualizes the number of entities and the relative frequency of word types across subfolders. Saves the plots in the ```out``` folder.
 
-To better understand the code, each function in the script ```feature_extractor.py`` will include a brief descriptive text.
+To better understand the code, each function in the script ```feature_extractor.py``` will include a brief descriptive text.
 
 ## Data
 
@@ -40,7 +40,7 @@ To ensure reproducibility and facilitate collaboration, follow these steps:
 
 1.  Clone the repository using the following command:
 ```python
-$ git clone "https://github.com/SMosegaard/cds-lang/tree/main/assignments/assignment-1"
+$ git clone "https://github.com/SMosegaard/cds-lang"
 ```
 2. Navigate into the 'assignment-1' folder:
 ```python
